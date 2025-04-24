@@ -39,3 +39,9 @@ jest.config.js
 
 # Ignore the ESLint configuration files
 eslint.config.js
+
+# Ignore the documentation directory to make the package lighter
+/docs
+
+# Ignore the utilities directory to make the package lighter
+/utils
