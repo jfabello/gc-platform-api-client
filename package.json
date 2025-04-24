@@ -1,0 +1,48 @@
+{
+	"name": "@jfabello/gc-platform-api-client",
+	"version": "0.1.0",
+	"description": "High-performance Genesys Cloud Platform API client for Node.js.",
+	"keywords": [
+		"genesys",
+		"cloud",
+		"platform",
+		"api",
+		"client",
+		"node",
+		"high",
+		"performance"
+	],
+	"license": "MIT",
+	"author": {
+		"name": "Juan F. Abello",
+		"email": "juan@jfabello.com"
+	},
+	"type": "module",
+	"main": "src/gc-platform-api-client-class.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jfabello/gc-platform-api-client.git"
+	},
+	"scripts": {
+		"test": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll --coverage"
+	},
+	"dependencies": {
+		"@jfabello/gc-platform-api-utils": "^0.5.0",
+		"@jfabello/http-client": "^2.0.0",
+		"@jfabello/simple-timer": "^3.0.0",
+		"ajv": "^8.0.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.0.0",
+		"@jest/globals": "^29.0.0",
+		"@jfabello/log-to-console": "^2.0.0",
+		"commander": "^13.0.0",
+		"eslint": "^9.0.0",
+		"globals": "^16.0.0",
+		"handlebars": "^4.0.0",
+		"jest": "^29.0.0"
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}
