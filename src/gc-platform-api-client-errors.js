@@ -177,16 +177,16 @@ class ERROR_GC_PLATFORM_API_CLIENT_MAX_RETRIES_OUT_OF_BOUNDS extends RangeError 
 }
 
 /**
- * Thrown when the Genesys Cloud Platform API client is not in a state that allows its initialization.
- * @class ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE
+ * Thrown when the Genesys Cloud Platform API client is not in a state that allows it to connect to Genesys Cloud.
+ * @class ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE
  * @extends Error
  */
-class ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE extends Error {
+class ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE extends Error {
 	/**
 	 * @constructor
 	 */
 	constructor() {
-		super(`The Genesys Cloud Platform API client is not in a state that allows its initialization.`);
+		super(`The Genesys Cloud Platform API client is not in a state that allows it to connect to Genesys Cloud.`);
 		this.name = Object.getPrototypeOf(this).constructor.name;
 	}
 }
@@ -616,7 +616,7 @@ const errors = {
 	ERROR_GC_PLATFORM_API_CLIENT_TIME_BETWEEN_REQUESTS_OUT_OF_BOUNDS,
 	ERROR_GC_PLATFORM_API_CLIENT_MAX_RETRIES_TYPE_INVALID,
 	ERROR_GC_PLATFORM_API_CLIENT_MAX_RETRIES_OUT_OF_BOUNDS,
-	ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE,
+	ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE,
 	ERROR_GC_PLATFORM_API_CLIENT_HTTP_STATUS_CODE_ERROR,
 	ERROR_GC_PLATFORM_API_CLIENT_GC_BAD_RESPONSE,
 	ERROR_GC_PLATFORM_API_CLIENT_ID_NOT_FOUND,

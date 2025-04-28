@@ -286,13 +286,13 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.CREATED);
 	});
 
-	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must return a Promise object and set the instance state to INITIALIZING when the instance is in the CREATED state", async () => {
+	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must return a Promise object and set the instance state to CONNECTING when the instance is in the CREATED state", async () => {
 		expect.assertions(3);
 		const gcPlatformAPIClient = new GCPlatformAPIClient(DUMMY_CLIENT_ID, DUMMY_CLIENT_SECRET, DUMMY_REGION);
 		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.CREATED);
 		const gcPlatformAPIClientConnectPromise = gcPlatformAPIClient.connect();
 		expect(gcPlatformAPIClientConnectPromise).toBeInstanceOf(Promise);
-		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.INITIALIZING);
+		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.CONNECTING);
 		try {
 			await gcPlatformAPIClientConnectPromise;
 		} catch {
@@ -312,7 +312,7 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		}
 	});
 
-	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must throw an ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE error when the client is not in a state that allows its initialization", async () => {
+	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must throw an ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE error when the client is not in a state that allows it to connect to Genesys Cloud", async () => {
 		expect.assertions(8);
 		let gcPlatformAPIClient = null;
 		let gcPlatformAPIClientConnectPromise = null;
@@ -326,14 +326,14 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		try {
 			gcPlatformAPIClient.connect();
 		} catch (error) {
-			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE);
+			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE);
 		}
 		gcPlatformAPIClientClosePromise = gcPlatformAPIClient.close();
 		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.CLOSING);
 		try {
 			gcPlatformAPIClient.connect();
 		} catch (error) {
-			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE);
+			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE);
 		}
 		await gcPlatformAPIClientClosePromise;
 
@@ -341,7 +341,7 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		try {
 			gcPlatformAPIClient.connect();
 		} catch (error) {
-			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE);
+			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE);
 		}
 
 		// From the FAILED state
@@ -355,7 +355,7 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		try {
 			gcPlatformAPIClient.connect();
 		} catch (error) {
-			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE);
+			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE);
 		}
 	});
 
@@ -677,9 +677,9 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		} catch (error) {
 			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_API_CALLING_UNAVAILABLE);
 		}
-		// From the INITIALIZING state
+		// From the CONNECTING state
 		gcPlatformAPIClientConnectPromise = gcPlatformAPIClient.connect();
-		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.INITIALIZING);
+		expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.CONNECTING);
 		try {
 			gcPlatformAPIClient.queueAPICall("/api/v2/users/me", "GET");
 		} catch (error) {

@@ -16,6 +16,7 @@ The Genesys Cloud Platform API client for Node.js is a high-performance and easy
 ## Table of Contents
 
 - [What is New](#what-is-new)
+  - [Version 0.2.0](#version-020)
   - [Version 0.1.0](#version-010)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -37,6 +38,10 @@ The Genesys Cloud Platform API client for Node.js is a high-performance and easy
 - [License](#license)
 
 ## What is New
+
+### Version 0.2.0
+
+- Changed the INITIALIZING state name and symbol to CONNECTING.
 
 ### Version 0.1.0
 
@@ -191,9 +196,9 @@ The `GCPlatformAPIClient` class provides the following states:
 ```mermaid
 stateDiagram-v2
 [*] --> CREATED : new GCPlatformAPIClient(...)
-CREATED --> INITIALIZING : connect()
-INITIALIZING --> IDLE : connect() fulfills
-INITIALIZING --> FAILED : connect() rejects
+CREATED --> CONNECTING : connect()
+CONNECTING --> IDLE : connect() fulfills
+CONNECTING --> FAILED : connect() rejects
 IDLE --> RUNNING : An API call in the backlog starts executing
 RUNNING --> IDLE : All API calls in the backlog have been executed
 IDLE --> CLOSING : close()
@@ -207,7 +212,7 @@ CLOSING --> FAILED : close() rejects
 ### Static Properties
 
 - `CREATED`: A symbol that represents the CREATED state of the client.
-- `INITIALIZING`: A symbol that represents the INITIALIZING state of the client.
+- `CONNECTING`: A symbol that represents the CONNECTING state of the client.
 - `IDLE`: A symbol that represents the IDLE state of the client.
 - `RUNNING`: A symbol that represents the RUNNING state of the client.
 - `CLOSING`: A symbol that represents the CLOSING state of the client.
@@ -259,7 +264,7 @@ A promise that fulfills to `true` if the client connects successfully.
 
 ##### Throws
 
-- `ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE`: If the client is not in a state that allows its initialization.
+- `ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE`: If the client is not in a state that allows it to connect to Genesys Cloud.
 - `ERROR_GC_PLATFORM_API_CLIENT_INTERNAL_ERROR`: If an internal error occurs.
 - `ERROR_GC_PLATFORM_API_CLIENT_ID_NOT_FOUND`: If the Genesys Cloud OAuth client ID is not found.
 - `ERROR_GC_PLATFORM_API_CLIENT_AUTHENTICATION_FAILURE`: If the Genesys Cloud OAuth authentication fails.

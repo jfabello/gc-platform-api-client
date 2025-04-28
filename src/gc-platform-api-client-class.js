@@ -126,13 +126,13 @@ import { symbols } from "./gc-platform-api-client-symbols.js";
 class GCPlatformAPIClient {
 	// Private static properties
 	static #CREATED = Symbol("CREATED");
-	static #INITIALIZING = Symbol("INITIALIZING");
+	static #CONNECTING = Symbol("CONNECTING");
 	static #IDLE = Symbol("IDLE");
 	static #RUNNING = Symbol("RUNNING");
 	static #CLOSING = Symbol("CLOSING");
 	static #CLOSED = Symbol("CLOSED");
 	static #FAILED = Symbol("FAILED");
-	static #STATES = [GCPlatformAPIClient.#CREATED, GCPlatformAPIClient.#INITIALIZING, GCPlatformAPIClient.#IDLE, GCPlatformAPIClient.#RUNNING, GCPlatformAPIClient.#CLOSING, GCPlatformAPIClient.#CLOSED, GCPlatformAPIClient.#FAILED];
+	static #STATES = [GCPlatformAPIClient.#CREATED, GCPlatformAPIClient.#CONNECTING, GCPlatformAPIClient.#IDLE, GCPlatformAPIClient.#RUNNING, GCPlatformAPIClient.#CLOSING, GCPlatformAPIClient.#CLOSED, GCPlatformAPIClient.#FAILED];
 
 	// Private instance properties
 	/** @type {symbol} */ #clientState = null;
@@ -249,13 +249,13 @@ class GCPlatformAPIClient {
 	}
 
 	/**
-	 * Read-only property representing the INITIALIZING state.
+	 * Read-only property representing the CONNECTING state.
 	 * @static
 	 * @readonly
 	 * @type {symbol}
 	 */
-	static get INITIALIZING() {
-		return GCPlatformAPIClient.#INITIALIZING;
+	static get CONNECTING() {
+		return GCPlatformAPIClient.#CONNECTING;
 	}
 
 	/**
@@ -1192,7 +1192,7 @@ class GCPlatformAPIClient {
 	 * Connects the Genesys Cloud Platform API client.
 	 * @async
 	 * @returns {Promise<boolean>} A promise that fulfills to true if the client connected.
-	 * @throws {ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE} If the client is not in a state that allows its initialization.
+	 * @throws {ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE} If the client is not in a state that allows it to connect to Genesys Cloud.
 	 * @throws {ERROR_GC_PLATFORM_API_CLIENT_INTERNAL_ERROR} If an internal error occurred while refreshing the Genesys Cloud OAuth access token.
 	 * @throws {ERROR_GC_PLATFORM_API_CLIENT_ID_NOT_FOUND} If the Genesys Cloud OAuth client ID is not found.
 	 * @throws {ERROR_GC_PLATFORM_API_CLIENT_AUTHENTICATION_FAILURE} If the Genesys Cloud OAuth authentication failed.
@@ -1201,18 +1201,18 @@ class GCPlatformAPIClient {
 	 * @throws Errors thrown by the makeRequest() method of the HTTP client class.
 	 */
 	connect() {
-		// Return the Genesys Cloud Platform API client connect promise object if the client state is already INITIALIZING
-		if (this.#clientState === GCPlatformAPIClient.#INITIALIZING) {
+		// Return the Genesys Cloud Platform API client connect promise object if the client state is already CONNECTING
+		if (this.#clientState === GCPlatformAPIClient.#CONNECTING) {
 			return this.#connectPromise;
 		}
 
-		// Throw an error if the client is not in a state that allows its initialization
+		// Throw an error if the client is not in a state that allows it to connect to Genesys Cloud
 		if (this.#clientState !== GCPlatformAPIClient.#CREATED) {
-			throw new errors.ERROR_GC_PLATFORM_API_CLIENT_INIT_UNAVAILABLE();
+			throw new errors.ERROR_GC_PLATFORM_API_CLIENT_CONNECT_UNAVAILABLE();
 		}
 
-		// Set the client state to INITIALIZING
-		this.#changeState(GCPlatformAPIClient.#INITIALIZING);
+		// Set the client state to CONNECTING
+		this.#changeState(GCPlatformAPIClient.#CONNECTING);
 
 		this.#connectPromise = this.#connect();
 
