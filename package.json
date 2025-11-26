@@ -24,6 +24,7 @@
 		"url": "https://github.com/jfabello/gc-platform-api-client.git"
 	},
 	"scripts": {
+		"lint": "eslint --config eslint.config.js",
 		"test": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll --coverage"
 	},
 	"dependencies": {
