@@ -32,6 +32,7 @@
 - [`getIntegrationsClientappsUnifiedcommunications`](#getintegrationsclientappsunifiedcommunications) - UC integration client application configuration.
 - [`getIntegrationsCredential`](#getintegrationscredential) - Get a single credential with sensitive fields redacted
 - [`getIntegrationsCredentials`](#getintegrationscredentials) - List multiple sets of credentials
+- [`getIntegrationsCredentialsListing`](#getintegrationscredentialslisting) - List multiple sets of credentials using cursor-based paging
 - [`getIntegrationsCredentialsTypes`](#getintegrationscredentialstypes) - List all credential types
 - [`getIntegrationsSpeechAudioconnector`](#getintegrationsspeechaudioconnector) - Get a list of Audio Connector integrations
 - [`getIntegrationsSpeechAudioconnectorIntegrationId`](#getintegrationsspeechaudioconnectorintegrationid) - Get an Audio Connector integration
@@ -305,6 +306,9 @@ List integrations
 - `query.expand` - **(string[], optional)** variable name requested by expand list
 - `query.nextPage` - **(string, optional)** next page token
 - `query.previousPage` - **(string, optional)** Previous page token
+- `query.ids` - **(string[], optional)** Comma-separated list of integration IDs to filter by (max 100)
+- `query.integrationType` - **(string, optional)** Filter integrations by integration type ID
+- `query.reportedState` - **(string, optional)** Filter integrations by reported state (case-insensitive)
 
 #### Returns
 
@@ -1110,6 +1114,13 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 List multiple sets of credentials
 
+> [!WARNING]
+> This method is deprecated and may be removed in the future.
+
+#### Description
+
+This endpoint is deprecated. Please see the Listing API (GET /api/v2/integrations/credentials/listing)
+
 #### Endpoint
 
 `GET /api/v2/integrations/credentials`
@@ -1127,6 +1138,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [CredentialInfoListing](../definitions/credentialinfolisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getIntegrationsCredentialsListing`
+
+List multiple sets of credentials using cursor-based paging
+
+#### Endpoint
+
+`GET /api/v2/integrations/credentials/listing`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.before` - **(string, optional)** The cursor that points to the start of the set of entities that has been returned.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(string, optional)** Number of entities to return. Maximum of 200.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CredentialInfoCursorListing](../definitions/credentialinfocursorlisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -3064,4 +3110,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.384Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.651Z*

@@ -3,11 +3,13 @@
 ## Methods
 
 - [`deleteAnalyticsConversationsDetailsJob`](#deleteanalyticsconversationsdetailsjob) - Delete/cancel an async details job
+- [`deleteConversation`](#deleteconversation) - Update a conversation by disconnecting all of the participants
 - [`deleteConversationParticipantCode`](#deleteconversationparticipantcode) - Delete a code used to add a communication to this participant
 - [`deleteConversationParticipantFlaggedreason`](#deleteconversationparticipantflaggedreason) - Remove flagged reason from conversation participant.
 - [`deleteConversationsCallParticipantConsult`](#deleteconversationscallparticipantconsult) - Cancel the transfer
 - [`deleteConversationsEmailMessagesDraftAttachment`](#deleteconversationsemailmessagesdraftattachment) - Delete attachment from draft
 - [`deleteConversationsMessagesCachedmediaCachedMediaItemId`](#deleteconversationsmessagescachedmediacachedmediaitemid) - Remove a cached media item asychronously
+- [`deleteConversationsMessagingIntegrationsAppleIntegrationId`](#deleteconversationsmessagingintegrationsappleintegrationid) - Delete an Apple messaging integration
 - [`deleteConversationsMessagingIntegrationsFacebookIntegrationId`](#deleteconversationsmessagingintegrationsfacebookintegrationid) - Delete a Facebook messaging integration
 - [`deleteConversationsMessagingIntegrationsInstagramIntegrationId`](#deleteconversationsmessagingintegrationsinstagramintegrationid) - Delete Instagram messaging integration
 - [`deleteConversationsMessagingIntegrationsOpenIntegrationId`](#deleteconversationsmessagingintegrationsopenintegrationid) - Delete an Open messaging integration
@@ -22,6 +24,8 @@
 - [`getAnalyticsConversationsDetailsJobResults`](#getanalyticsconversationsdetailsjobresults) - Fetch a page of results for an async details job
 - [`getAnalyticsConversationsDetailsJobsAvailability`](#getanalyticsconversationsdetailsjobsavailability) - Lookup the datalake availability date and time
 - [`getConversation`](#getconversation) - Get conversation
+- [`getConversationCommunicationInternalmessage`](#getconversationcommunicationinternalmessage) - Get message
+- [`getConversationCommunicationInternalmessages`](#getconversationcommunicationinternalmessages) - Get messages for communication
 - [`getConversationParticipantSecureivrsession`](#getconversationparticipantsecureivrsession) - Fetch info on a secure session
 - [`getConversationParticipantSecureivrsessions`](#getconversationparticipantsecureivrsessions) - Get a list of secure sessions for this participant.
 - [`getConversationParticipantWrapup`](#getconversationparticipantwrapup) - Get the wrap-up for this conversation participant. 
@@ -61,9 +65,12 @@
 - [`getConversationsEmailParticipantWrapupcodes`](#getconversationsemailparticipantwrapupcodes) - Get list of wrapup codes for this conversation participant
 - [`getConversationsEmails`](#getconversationsemails) - Get active email conversations for the logged in user
 - [`getConversationsEmailSettings`](#getconversationsemailsettings) - Get emails settings for a given conversation
+- [`getConversationsInternalmessage`](#getconversationsinternalmessage) - Get internal message conversation
+- [`getConversationsInternalmessages`](#getconversationsinternalmessages) - Get active internal message conversations for the logged in user
 - [`getConversationsKeyconfiguration`](#getconversationskeyconfiguration) - Get the encryption key configurations
 - [`getConversationsKeyconfigurations`](#getconversationskeyconfigurations) - Get a list of key configurations data
 - [`getConversationsMessage`](#getconversationsmessage) - Get message conversation
+- [`getConversationsMessageCommunicationMessagesMedia`](#getconversationsmessagecommunicationmessagesmedia) - Get message media list by status
 - [`getConversationsMessageCommunicationMessagesMediaMediaId`](#getconversationsmessagecommunicationmessagesmediamediaid) - Get media
 - [`getConversationsMessageDetails`](#getconversationsmessagedetails) - Get message
 - [`getConversationsMessageMessage`](#getconversationsmessagemessage) - Get conversation message
@@ -75,7 +82,15 @@
 - [`getConversationsMessagesCachedmediaCachedMediaItemId`](#getconversationsmessagescachedmediacachedmediaitemid) - Get a cached media item
 - [`getConversationsMessagingFacebookApp`](#getconversationsmessagingfacebookapp) - Get Genesys Facebook App Id
 - [`getConversationsMessagingFacebookPermissions`](#getconversationsmessagingfacebookpermissions) - Get a list of Facebook Permissions
+- [`getConversationsMessagingIdentityresolutionIntegrationsAppleIntegrationId`](#getconversationsmessagingidentityresolutionintegrationsappleintegrationid) - Get Apple messaging integration identity resolution settings
+- [`getConversationsMessagingIdentityresolutionIntegrationsFacebookIntegrationId`](#getconversationsmessagingidentityresolutionintegrationsfacebookintegrationid) - Get Facebook messaging integration identity resolution settings
+- [`getConversationsMessagingIdentityresolutionIntegrationsInstagramIntegrationId`](#getconversationsmessagingidentityresolutionintegrationsinstagramintegrationid) - Get an Instagram integration identity resolution settings
+- [`getConversationsMessagingIdentityresolutionIntegrationsOpenIntegrationId`](#getconversationsmessagingidentityresolutionintegrationsopenintegrationid) - Get an open messaging integration Identity Resolution settings
+- [`getConversationsMessagingIdentityresolutionIntegrationsTwitterIntegrationId`](#getconversationsmessagingidentityresolutionintegrationstwitterintegrationid) - Get X (Formally Twitter) messaging integration identity resolution settings
+- [`getConversationsMessagingIdentityresolutionIntegrationsWhatsappIntegrationId`](#getconversationsmessagingidentityresolutionintegrationswhatsappintegrationid) - Get a whatsApp integration Identity Resolution settings
 - [`getConversationsMessagingIntegrations`](#getconversationsmessagingintegrations) - Get a list of Integrations
+- [`getConversationsMessagingIntegrationsApple`](#getconversationsmessagingintegrationsapple) - Get a list of Apple Integrations
+- [`getConversationsMessagingIntegrationsAppleIntegrationId`](#getconversationsmessagingintegrationsappleintegrationid) - Get an Apple messaging integration
 - [`getConversationsMessagingIntegrationsFacebook`](#getconversationsmessagingintegrationsfacebook) - Get a list of Facebook Integrations
 - [`getConversationsMessagingIntegrationsFacebookIntegrationId`](#getconversationsmessagingintegrationsfacebookintegrationid) - Get a Facebook messaging integration
 - [`getConversationsMessagingIntegrationsInstagram`](#getconversationsmessagingintegrationsinstagram) - Get a list of Instagram Integrations
@@ -88,6 +103,7 @@
 - [`getConversationsMessagingIntegrationsWhatsapp`](#getconversationsmessagingintegrationswhatsapp) - Get a list of WhatsApp Integrations
 - [`getConversationsMessagingIntegrationsWhatsappIntegrationId`](#getconversationsmessagingintegrationswhatsappintegrationid) - Get a WhatsApp messaging integration
 - [`getConversationsMessagingIntegrationTwitterOauthSettings`](#getconversationsmessagingintegrationtwitteroauthsettings) - Get twitter oauth settings to patch an integration
+- [`getConversationsMessagingOauthAppleCallback`](#getconversationsmessagingoauthapplecallback) - Call Authentication provider callback to validate state and code
 - [`getConversationsMessagingSetting`](#getconversationsmessagingsetting) - Get a messaging setting
 - [`getConversationsMessagingSettings`](#getconversationsmessagingsettings) - Get a list of messaging settings
 - [`getConversationsMessagingSettingsDefault`](#getconversationsmessagingsettingsdefault) - Get the organization's default settings that will be used as the default when creating an integration.
@@ -102,8 +118,10 @@
 - [`getConversationSuggestions`](#getconversationsuggestions) - Get all suggestions for a conversation.
 - [`getConversationSummaries`](#getconversationsummaries) - Get the summaries of the conversation.
 - [`getConversationsVideoParticipantCommunicationWrapup`](#getconversationsvideoparticipantcommunicationwrapup) - Get the wrap-up for this conversation communication. 
+- [`getConversationsVideosMeeting`](#getconversationsvideosmeeting) - Gets a record for a given meetingId
 - [`patchConversationParticipant`](#patchconversationparticipant) - Update a participant.
 - [`patchConversationParticipantAttributes`](#patchconversationparticipantattributes) - Update the attributes on a conversation participant.
+- [`patchConversationRecordingstate`](#patchconversationrecordingstate) - Update a conversation by setting its recording state
 - [`patchConversationsAftercallworkConversationIdParticipantCommunication`](#patchconversationsaftercallworkconversationidparticipantcommunication) - Update after-call work for this conversation communication.
 - [`patchConversationsCall`](#patchconversationscall) - Update a conversation by setting its recording state, merging in other conversations to create a conference, or disconnecting all of the participants
 - [`patchConversationsCallback`](#patchconversationscallback) - Update a conversation by disconnecting all of the participants
@@ -111,14 +129,16 @@
 - [`patchConversationsCallbackParticipantAttributes`](#patchconversationscallbackparticipantattributes) - Update the attributes on a conversation participant.
 - [`patchConversationsCallbackParticipantCommunication`](#patchconversationscallbackparticipantcommunication) - Update conversation participant's communication by disconnecting it.
 - [`patchConversationsCallbacks`](#patchconversationscallbacks) - Update a scheduled callback
+- [`patchConversationsCallConference`](#patchconversationscallconference) - Update a conversation by merging in other conversations to create a conference
 - [`patchConversationsCallParticipant`](#patchconversationscallparticipant) - Update conversation participant
 - [`patchConversationsCallParticipantAttributes`](#patchconversationscallparticipantattributes) - Update the attributes on a conversation participant.
-- [`patchConversationsCallParticipantCommunication`](#patchconversationscallparticipantcommunication) - Update conversation participant's communication by disconnecting it.
+- [`patchConversationsCallParticipantCommunication`](#patchconversationscallparticipantcommunication) - Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 - [`patchConversationsCallParticipantConsult`](#patchconversationscallparticipantconsult) - Change who can speak
+- [`patchConversationsCallParticipantUserUserId`](#patchconversationscallparticipantuseruserid) - Update conversation participant on behalf of a user
 - [`patchConversationsChat`](#patchconversationschat) - Update a conversation by disconnecting all of the participants
 - [`patchConversationsChatParticipant`](#patchconversationschatparticipant) - Update conversation participant
 - [`patchConversationsChatParticipantAttributes`](#patchconversationschatparticipantattributes) - Update the attributes on a conversation participant.
-- [`patchConversationsChatParticipantCommunication`](#patchconversationschatparticipantcommunication) - Update conversation participant's communication by disconnecting it.
+- [`patchConversationsChatParticipantCommunication`](#patchconversationschatparticipantcommunication) - Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 - [`patchConversationsCobrowsesession`](#patchconversationscobrowsesession) - Update a conversation by disconnecting all of the participants
 - [`patchConversationsCobrowsesessionParticipant`](#patchconversationscobrowsesessionparticipant) - Update conversation participant
 - [`patchConversationsCobrowsesessionParticipantAttributes`](#patchconversationscobrowsesessionparticipantattributes) - Update the attributes on a conversation participant.
@@ -128,12 +148,13 @@
 - [`patchConversationsEmailMessagesDraft`](#patchconversationsemailmessagesdraft) - Reset conversation draft to its initial state and/or auto-fill draft content
 - [`patchConversationsEmailParticipant`](#patchconversationsemailparticipant) - Update conversation participant
 - [`patchConversationsEmailParticipantAttributes`](#patchconversationsemailparticipantattributes) - Update the attributes on a conversation participant.
-- [`patchConversationsEmailParticipantCommunication`](#patchconversationsemailparticipantcommunication) - Update conversation participant's communication by disconnecting it.
+- [`patchConversationsEmailParticipantCommunication`](#patchconversationsemailparticipantcommunication) - Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 - [`patchConversationsEmailParticipantParkingstate`](#patchconversationsemailparticipantparkingstate) - Update conversation by setting its parking state
 - [`patchConversationsMessage`](#patchconversationsmessage) - Update a conversation by disconnecting all of the participants
 - [`patchConversationsMessageParticipant`](#patchconversationsmessageparticipant) - Update conversation participant
 - [`patchConversationsMessageParticipantAttributes`](#patchconversationsmessageparticipantattributes) - Update the attributes on a conversation participant.
-- [`patchConversationsMessageParticipantCommunication`](#patchconversationsmessageparticipantcommunication) - Update conversation participant's communication by disconnecting it.
+- [`patchConversationsMessageParticipantCommunication`](#patchconversationsmessageparticipantcommunication) - Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
+- [`patchConversationsMessagingIntegrationsAppleIntegrationId`](#patchconversationsmessagingintegrationsappleintegrationid) - Update an Apple messaging integration
 - [`patchConversationsMessagingIntegrationsFacebookIntegrationId`](#patchconversationsmessagingintegrationsfacebookintegrationid) - Update Facebook messaging integration
 - [`patchConversationsMessagingIntegrationsInstagramIntegrationId`](#patchconversationsmessagingintegrationsinstagramintegrationid) - Update Instagram messaging integration
 - [`patchConversationsMessagingIntegrationsOpenIntegrationId`](#patchconversationsmessagingintegrationsopenintegrationid) - Update an Open messaging integration
@@ -143,6 +164,8 @@
 - [`patchConversationsMessagingSetting`](#patchconversationsmessagingsetting) - Update a messaging setting
 - [`patchConversationsMessagingSupportedcontentSupportedContentId`](#patchconversationsmessagingsupportedcontentsupportedcontentid) - Update a supported content profile
 - [`patchConversationsSettings`](#patchconversationssettings) - Update Settings
+- [`patchConversationSummaryEngagements`](#patchconversationsummaryengagements) - Update agent's engagement for the summary.
+- [`patchConversationSummaryFeedback`](#patchconversationsummaryfeedback) - Update the feedback for the summary.
 - [`patchConversationUtilizationlabel`](#patchconversationutilizationlabel) - Update the utilization label on a conversation. When there is no value provided, the system default label is applied
 - [`postAnalyticsConversationDetailsProperties`](#postanalyticsconversationdetailsproperties) - Index conversation properties
 - [`postAnalyticsConversationsActivityQuery`](#postanalyticsconversationsactivityquery) - Query for conversation activity observations
@@ -152,9 +175,11 @@
 - [`postConversationAssign`](#postconversationassign) - Attempts to manually assign a specified conversation to a specified user.  Ignores bullseye ring, PAR score, skills, and languages.
 - [`postConversationBarge`](#postconversationbarge) - Barge a conversation creating a barged in conference of connected participants.
 - [`postConversationCobrowse`](#postconversationcobrowse) - Creates a cobrowse session. Requires "conversation:cobrowse:add" (for web messaging) or "conversation:cobrowsevoice:add" permission.
+- [`postConversationCommunicationInternalmessages`](#postconversationcommunicationinternalmessages) - Send internal message
 - [`postConversationDisconnect`](#postconversationdisconnect) - Performs a full conversation teardown. Issues disconnect requests for any connected media. Applies a system wrap-up code to any participants that are pending wrap-up. This is not intended to be the normal way of ending interactions but is available in the event of problems with the application to allow a resynchronization of state across all components. It is recommended that users submit a support case if they are relying on this endpoint systematically as there is likely something that needs investigation.
 - [`postConversationParticipantCallbacks`](#postconversationparticipantcallbacks) - Create a new callback for the specified participant on the conversation.
 - [`postConversationParticipantDigits`](#postconversationparticipantdigits) - Sends DTMF to the participant
+- [`postConversationParticipantInternalmessagesUsersCommunications`](#postconversationparticipantinternalmessagesuserscommunications) - Setup internal message communication with user
 - [`postConversationParticipantReplace`](#postconversationparticipantreplace) - Replace this participant with the specified user and/or address
 - [`postConversationParticipantReplaceAgent`](#postconversationparticipantreplaceagent) - Replace this participant with the specified agent
 - [`postConversationParticipantReplaceExternal`](#postconversationparticipantreplaceexternal) - Replace this participant with the an external contact
@@ -176,7 +201,9 @@
 - [`postConversationsCallParticipantMonitor`](#postconversationscallparticipantmonitor) - Listen in on the conversation from the point of view of a given participant.
 - [`postConversationsCallParticipantReplace`](#postconversationscallparticipantreplace) - Replace this participant with the specified user and/or address
 - [`postConversationsCallParticipants`](#postconversationscallparticipants) - Add participants to a conversation
+- [`postConversationsCallParticipantsUserUserId`](#postconversationscallparticipantsuseruserid) - Add participants to a conversation on behalf of a user
 - [`postConversationsCalls`](#postconversationscalls) - Create a call conversation
+- [`postConversationsCallsUserUserId`](#postconversationscallsuseruserid) - Create a call conversation on behalf of a user
 - [`postConversationsChatCommunicationMessages`](#postconversationschatcommunicationmessages) - Send a message on behalf of a communication in a chat conversation.
 - [`postConversationsChatCommunicationTyping`](#postconversationschatcommunicationtyping) - Send a typing-indicator on behalf of a communication in a chat conversation.
 - [`postConversationsChatParticipantCommunicationWrapup`](#postconversationschatparticipantcommunicationwrapup) - Apply wrap-up for this conversation communication
@@ -197,10 +224,13 @@
 - [`postConversationsKeyconfigurationsValidate`](#postconversationskeyconfigurationsvalidate) - Validate encryption key configurations without saving it
 - [`postConversationsMessageCommunicationMessages`](#postconversationsmessagecommunicationmessages) - Send message
 - [`postConversationsMessageCommunicationMessagesMedia`](#postconversationsmessagecommunicationmessagesmedia) - Create media
+- [`postConversationsMessageCommunicationMessagesMediaUploads`](#postconversationsmessagecommunicationmessagesmediauploads) - Create a URL to upload a message media file
+- [`postConversationsMessageCommunicationSocialmediaMessages`](#postconversationsmessagecommunicationsocialmediamessages) - Send a social media message
 - [`postConversationsMessageCommunicationTyping`](#postconversationsmessagecommunicationtyping) - Send message typing event
 - [`postConversationsMessageInboundOpenEvent`](#postconversationsmessageinboundopenevent) - Send an inbound Open Event Message
 - [`postConversationsMessageInboundOpenMessage`](#postconversationsmessageinboundopenmessage) - Send inbound Open Message
 - [`postConversationsMessageInboundOpenReceipt`](#postconversationsmessageinboundopenreceipt) - Send an inbound Open Receipt Message
+- [`postConversationsMessageInboundOpenStructuredResponse`](#postconversationsmessageinboundopenstructuredresponse) - Send inbound Open Response
 - [`postConversationsMessageMessagesBulk`](#postconversationsmessagemessagesbulk) - Get messages in batch
 - [`postConversationsMessageParticipantCommunicationWrapup`](#postconversationsmessageparticipantcommunicationwrapup) - Apply wrap-up for this conversation communication
 - [`postConversationsMessageParticipantMonitor`](#postconversationsmessageparticipantmonitor) - Listen in on the conversation from the point of view of a given participant.
@@ -208,6 +238,7 @@
 - [`postConversationsMessages`](#postconversationsmessages) - Create an outbound messaging conversation.
 - [`postConversationsMessagesAgentless`](#postconversationsmessagesagentless) - Send an agentless outbound message
 - [`postConversationsMessagesInboundOpen`](#postconversationsmessagesinboundopen) - Send an inbound Open Message
+- [`postConversationsMessagingIntegrationsApple`](#postconversationsmessagingintegrationsapple) - Create Apple Integration
 - [`postConversationsMessagingIntegrationsFacebook`](#postconversationsmessagingintegrationsfacebook) - Create a Facebook Integration
 - [`postConversationsMessagingIntegrationsInstagram`](#postconversationsmessagingintegrationsinstagram) - Create Instagram Integration
 - [`postConversationsMessagingIntegrationsOpen`](#postconversationsmessagingintegrationsopen) - Create an Open messaging integration
@@ -223,6 +254,7 @@
 - [`postConversationSuggestionsFeedback`](#postconversationsuggestionsfeedback) - Suggestion feedback.
 - [`postConversationSummaryFeedback`](#postconversationsummaryfeedback) - Submit feedback for the summary.
 - [`postConversationsVideoParticipantCommunicationWrapup`](#postconversationsvideoparticipantcommunicationwrapup) - Apply wrap-up for this conversation communication
+- [`postConversationsVideosMeetings`](#postconversationsvideosmeetings) - Generate a meetingId for a given conferenceId
 - [`putConversationParticipantFlaggedreason`](#putconversationparticipantflaggedreason) - Set flagged reason on conversation participant to indicate bad conversation quality.
 - [`putConversationsCallbackRecordingstate`](#putconversationscallbackrecordingstate) - Update a conversation by setting its recording state
 - [`putConversationsCallParticipantCommunicationUuidata`](#putconversationscallparticipantcommunicationuuidata) - Set uuiData to be sent on future commands.
@@ -234,6 +266,12 @@
 - [`putConversationsEmailRecordingstate`](#putconversationsemailrecordingstate) - Update a conversation by setting its recording state
 - [`putConversationsKeyconfiguration`](#putconversationskeyconfiguration) - Update the encryption key configurations
 - [`putConversationsMessageRecordingstate`](#putconversationsmessagerecordingstate) - Update a conversation by setting its recording state
+- [`putConversationsMessagingIdentityresolutionIntegrationsAppleIntegrationId`](#putconversationsmessagingidentityresolutionintegrationsappleintegrationid) - Create an identity resolution settings for a Apple messaging integration
+- [`putConversationsMessagingIdentityresolutionIntegrationsFacebookIntegrationId`](#putconversationsmessagingidentityresolutionintegrationsfacebookintegrationid) - Create an identity resolution settings for a Facebook messaging integration
+- [`putConversationsMessagingIdentityresolutionIntegrationsInstagramIntegrationId`](#putconversationsmessagingidentityresolutionintegrationsinstagramintegrationid) - Create identity resolution settings for an Instagram messaging integration
+- [`putConversationsMessagingIdentityresolutionIntegrationsOpenIntegrationId`](#putconversationsmessagingidentityresolutionintegrationsopenintegrationid) - Update an open messaging integration Identity Resolution settings
+- [`putConversationsMessagingIdentityresolutionIntegrationsTwitterIntegrationId`](#putconversationsmessagingidentityresolutionintegrationstwitterintegrationid) - Create an identity resolution settings for an X (Formally Twitter) messaging integration
+- [`putConversationsMessagingIdentityresolutionIntegrationsWhatsappIntegrationId`](#putconversationsmessagingidentityresolutionintegrationswhatsappintegrationid) - Update a whatsApp integration Identity Resolution settings
 - [`putConversationsMessagingSettingsDefault`](#putconversationsmessagingsettingsdefault) - Set the organization's default setting that may be applied to to integrations without settings
 - [`putConversationsMessagingSupportedcontentDefault`](#putconversationsmessagingsupportedcontentdefault) - Set the organization's default supported content profile that may be assigned to an integration when it is created.
 - [`putConversationsMessagingThreadingtimeline`](#putconversationsmessagingthreadingtimeline) - Update conversation threading window timeline for each messaging type
@@ -261,6 +299,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `204` |  | Deleted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `deleteConversation`
+
+Update a conversation by disconnecting all of the participants
+
+#### Endpoint
+
+`DELETE /api/v2/conversations/{conversationId}`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversation ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Operation was successful. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -439,6 +509,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `deleteConversationsMessagingIntegrationsAppleIntegrationId`
+
+Delete an Apple messaging integration
+
+#### Endpoint
+
+`DELETE /api/v2/conversations/messaging/integrations/apple/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Operation was successful |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `deleteConversationsMessagingIntegrationsFacebookIntegrationId`
 
 Delete a Facebook messaging integration
@@ -592,7 +694,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [WhatsAppIntegration](../definitions/whatsappintegration-definition.md) | successful operation |
-| `202` |  | Request Accepted |
+| `204` |  | Request Accepted |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -903,6 +1005,76 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getConversationCommunicationInternalmessage`
+
+Get message
+
+#### Endpoint
+
+`GET /api/v2/conversations/{conversationId}/communications/{communicationId}/internalmessages/{messageId}`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `messageId` - **(string, required)** messageId
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InternalMessageData](../definitions/internalmessagedata-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationCommunicationInternalmessages`
+
+Get messages for communication
+
+#### Endpoint
+
+`GET /api/v2/conversations/{conversationId}/communications/{communicationId}/internalmessages`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.pageSize` - **(number, optional)** Indicates maximum number of results in response. Default page size is 25 results. The maximum page size is 200.
+- `query.pageNumber` - **(number, optional)** Page number
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InternalMessageDataEntityListing](../definitions/internalmessagedataentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getConversationParticipantSecureivrsession`
 
 Fetch info on a secure session
@@ -1149,7 +1321,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1184,7 +1356,7 @@ Get the wrap-up for this conversation participant.
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1285,7 +1457,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1320,7 +1492,7 @@ Get the wrap-up for this conversation participant.
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1484,7 +1656,7 @@ Get chat conversation
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -1523,7 +1695,7 @@ Get a web chat conversation message
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/. The current user must be involved with the conversation to get its messages.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/. The current user must be involved with the conversation to get its messages.
 
 #### Endpoint
 
@@ -1563,7 +1735,7 @@ Get the messages of a chat conversation.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/. The current user must be involved with the conversation to get its messages.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/. The current user must be involved with the conversation to get its messages.
 
 #### Endpoint
 
@@ -1607,7 +1779,7 @@ Get the wrap-up for this conversation communication.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -1619,7 +1791,7 @@ This endpoint is deprecated. Please see the article https://help.mypurecloud.com
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1650,7 +1822,7 @@ Get the wrap-up for this conversation participant.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -1661,7 +1833,7 @@ This endpoint is deprecated. Please see the article https://help.mypurecloud.com
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1692,7 +1864,7 @@ Get list of wrapup codes for this conversation participant
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -1732,7 +1904,7 @@ Get active chat conversations for the logged in user
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -1803,7 +1975,7 @@ Get the wrap-up for this conversation communication.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -1815,7 +1987,7 @@ This endpoint is deprecated. Please see the article https://help.mypurecloud.com
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1846,7 +2018,7 @@ Get the wrap-up for this conversation participant.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -1857,7 +2029,7 @@ This endpoint is deprecated. Please see the article https://help.mypurecloud.com
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -1888,7 +2060,7 @@ Get list of wrapup codes for this conversation participant
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -2126,7 +2298,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -2161,7 +2333,7 @@ Get the wrap-up for this conversation participant.
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -2280,6 +2452,70 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getConversationsInternalmessage`
+
+Get internal message conversation
+
+#### Endpoint
+
+`GET /api/v2/conversations/internalmessages/{conversationId}`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InternalMessageConversation](../definitions/internalmessageconversation-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsInternalmessages`
+
+Get active internal message conversations for the logged in user
+
+#### Endpoint
+
+`GET /api/v2/conversations/internalmessages`
+
+#### Parameters
+
+This method does not have any parameters.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InternalMessageConversationEntityListing](../definitions/internalmessageconversationentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getConversationsKeyconfiguration`
 
 Get the encryption key configurations
@@ -2376,6 +2612,43 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getConversationsMessageCommunicationMessagesMedia`
+
+Get message media list by status
+
+#### Endpoint
+
+`GET /api/v2/conversations/messages/{conversationId}/communications/{communicationId}/messages/media`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.status` - **(string, optional)** The status on which to filter the response.
+- `query.pageNumber` - **(number, optional)** Page number
+- `query.pageSize` - **(number, optional)** Page size
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MessageMediaListing](../definitions/messagemedialisting-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getConversationsMessageCommunicationMessagesMediaMediaId`
 
 Get media
@@ -2426,7 +2699,7 @@ Get message
 
 - `messageId` - **(string, required)** messageId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media, stickers)
+- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media)
 
 #### Returns
 
@@ -2461,7 +2734,7 @@ Get conversation message
 - `conversationId` - **(string, required)** conversationId
 - `messageId` - **(string, required)** messageId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media, stickers)
+- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media)
 
 #### Returns
 
@@ -2497,7 +2770,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -2532,7 +2805,7 @@ Get the wrap-up for this conversation participant.
 - `conversationId` - **(string, required)** conversationId
 - `participantId` - **(string, required)** participantId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -2750,6 +3023,198 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getConversationsMessagingIdentityresolutionIntegrationsAppleIntegrationId`
+
+Get Apple messaging integration identity resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/apple/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIdentityResolutionConfig](../definitions/appleidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIdentityresolutionIntegrationsFacebookIntegrationId`
+
+Get Facebook messaging integration identity resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/facebook/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [FacebookIdentityResolutionConfig](../definitions/facebookidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIdentityresolutionIntegrationsInstagramIntegrationId`
+
+Get an Instagram integration identity resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/instagram/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InstagramIdentityResolutionConfig](../definitions/instagramidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIdentityresolutionIntegrationsOpenIntegrationId`
+
+Get an open messaging integration Identity Resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/open/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [OpenMessagingIdentityResolutionConfig](../definitions/openmessagingidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIdentityresolutionIntegrationsTwitterIntegrationId`
+
+Get X (Formally Twitter) messaging integration identity resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/twitter/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration Id
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [TwitterIdentityResolutionConfig](../definitions/twitteridentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIdentityresolutionIntegrationsWhatsappIntegrationId`
+
+Get a whatsApp integration Identity Resolution settings
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/identityresolution/integrations/whatsapp/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WhatsAppIdentityResolutionConfig](../definitions/whatsappidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getConversationsMessagingIntegrations`
 
 Get a list of Integrations
@@ -2774,6 +3239,77 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [MessagingIntegrationEntityListing](../definitions/messagingintegrationentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIntegrationsApple`
+
+Get a list of Apple Integrations
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/integrations/apple`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.pageSize` - **(number, optional)** Page size
+- `query.pageNumber` - **(number, optional)** Page number
+- `query.expand` - **(string, optional)** Expand instructions for the return value.
+- `query.supportedContent.id` - **(string, optional)** Filter integrations returned based on the supported content ID
+- `query.messagingSetting.id` - **(string, optional)** Filter integrations returned based on the setting ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIntegrationEntityListing](../definitions/appleintegrationentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsMessagingIntegrationsAppleIntegrationId`
+
+Get an Apple messaging integration
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/integrations/apple/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string, optional)** Expand instructions for the return value.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIntegration](../definitions/appleintegration-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -3214,6 +3750,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getConversationsMessagingOauthAppleCallback`
+
+Call Authentication provider callback to validate state and code
+
+#### Endpoint
+
+`GET /api/v2/conversations/messaging/oauth/apple/callback`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.code` - **(string, required)** The authorization code to be sent to the authentication server during the token request.
+- `query.state` - **(string, required)** The state/nonce value generated by Genesys Auth-Client Service.
+- `query.error` - **(string, optional)** Error parameter from OAuth provider
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [OAuthAppleAuthorizationResponse](../definitions/oauthappleauthorizationresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getConversationsMessagingSetting`
 
 Get a messaging setting
@@ -3463,7 +4034,7 @@ Get the wrap-up for this conversation communication.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -3475,7 +4046,7 @@ This endpoint is deprecated. Please see the article https://help.mypurecloud.com
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -3543,7 +4114,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -3682,7 +4253,7 @@ Get the wrap-up for this conversation communication.
 - `participantId` - **(string, required)** participantId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.provisional` - **(boolean, optional)** Indicates if the wrap-up code is provisional.
+- `query.provisional` - **(boolean, optional)** Indicates whether or not to fetch provisional wrap-up code.
 
 #### Returns
 
@@ -3691,6 +4262,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [AssignedWrapupCode](../definitions/assignedwrapupcode-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getConversationsVideosMeeting`
+
+Gets a record for a given meetingId
+
+#### Endpoint
+
+`GET /api/v2/conversations/videos/meetings/{meetingId}`
+
+#### Parameters
+
+- `meetingId` - **(string, required)** meetingId
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MeetingIdRecord](../definitions/meetingidrecord-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -3755,6 +4358,39 @@ Update the attributes on a conversation participant.
 - `conversationId` - **(string, required)** conversation ID
 - `participantId` - **(string, required)** participant ID
 - `body` - **([ParticipantAttributes](../definitions/participantattributes-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` |  | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `patchConversationRecordingstate`
+
+Update a conversation by setting its recording state
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/{conversationId}/recordingstate`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversation ID
+- `body` - **([SetRecordingState](../definitions/setrecordingstate-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4015,6 +4651,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `patchConversationsCallConference`
+
+Update a conversation by merging in other conversations to create a conference
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/calls/{conversationId}/conference`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `body` - **([UpdateConferenceRequest](../definitions/updateconferencerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` |  | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `patchConversationsCallParticipant`
 
 Update conversation participant
@@ -4085,7 +4754,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `patchConversationsCallParticipantCommunication`
 
-Update conversation participant's communication by disconnecting it.
+Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 
 #### Endpoint
 
@@ -4152,6 +4821,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `patchConversationsCallParticipantUserUserId`
+
+Update conversation participant on behalf of a user
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/calls/{conversationId}/participants/{participantId}/user/{userId}`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `participantId` - **(string, required)** participantId
+- `userId` - **(string, required)** userId
+- `body` - **([MediaParticipantRequest](../definitions/mediaparticipantrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` |  | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `patchConversationsChat`
 
 Update a conversation by disconnecting all of the participants
@@ -4161,7 +4865,7 @@ Update a conversation by disconnecting all of the participants
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -4201,7 +4905,7 @@ Update conversation participant
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -4242,7 +4946,7 @@ Update the attributes on a conversation participant.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -4276,14 +4980,14 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `patchConversationsChatParticipantCommunication`
 
-Update conversation participant's communication by disconnecting it.
+Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 
 > [!WARNING]
 > This method is deprecated and may be removed in the future.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -4325,7 +5029,7 @@ Update a conversation by disconnecting all of the participants
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -4365,7 +5069,7 @@ Update conversation participant
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -4406,7 +5110,7 @@ Update the attributes on a conversation participant.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -4447,7 +5151,7 @@ Update conversation participant's communication by disconnecting it.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -4652,7 +5356,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `patchConversationsEmailParticipantCommunication`
 
-Update conversation participant's communication by disconnecting it.
+Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 
 #### Endpoint
 
@@ -4822,7 +5526,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `patchConversationsMessageParticipantCommunication`
 
-Update conversation participant's communication by disconnecting it.
+Update conversation participant's communication by disconnecting it. This endpoint does not update wrapup.
 
 #### Endpoint
 
@@ -4842,6 +5546,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [Empty](../definitions/empty-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `patchConversationsMessagingIntegrationsAppleIntegrationId`
+
+Update an Apple messaging integration
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/messaging/integrations/apple/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([AppleIntegrationUpdateRequest](../definitions/appleintegrationupdaterequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIntegration](../definitions/appleintegration-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -4997,7 +5734,7 @@ Activate a WhatsApp messaging integration created using the WhatsApp embedded si
 
 #### Description
 
-Please specify the phone number to associate with this WhatsApp integration from the list of available phone numbers returned to you in the POST call to create the integration. You can then run a GET on the integration to check if its status has been updated to Active
+Please specify the phone number to associate with this WhatsApp integration from the list of available phone numbers returned to you in the GET call on the integration with a createStatus of Completed. You can then run a GET on the integration to check if its status has been updated to Active.
 
 #### Endpoint
 
@@ -5148,6 +5885,74 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `202` |  | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `patchConversationSummaryEngagements`
+
+Update agent's engagement for the summary.
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/{conversationId}/summaries/{summaryId}/engagements`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** Conversation ID
+- `summaryId` - **(string, required)** Summary ID
+- `body` - **([EngagementRequest](../definitions/engagementrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Operation was successful. |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `patchConversationSummaryFeedback`
+
+Update the feedback for the summary.
+
+#### Endpoint
+
+`PATCH /api/v2/conversations/{conversationId}/summaries/{summaryId}/feedback`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** Conversation ID
+- `summaryId` - **(string, required)** Summary ID
+- `body` - **([FeedbackUpdateRequest](../definitions/feedbackupdaterequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Operation was successful. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -5455,6 +6260,44 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postConversationCommunicationInternalmessages`
+
+Send internal message
+
+#### Description
+
+Send a new internal message for an existing communication.
+
+#### Endpoint
+
+`POST /api/v2/conversations/{conversationId}/communications/{communicationId}/internalmessages`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `body` - **([InternalMessageRequest](../definitions/internalmessagerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` | [InternalMessageData](../definitions/internalmessagedata-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postConversationDisconnect`
 
 Performs a full conversation teardown. Issues disconnect requests for any connected media. Applies a system wrap-up code to any participants that are pending wrap-up. This is not intended to be the normal way of ending interactions but is available in the event of problems with the application to allow a resynchronization of state across all components. It is recommended that users submit a support case if they are relying on this endpoint systematically as there is likely something that needs investigation.
@@ -5542,6 +6385,44 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `202` |  | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postConversationParticipantInternalmessagesUsersCommunications`
+
+Setup internal message communication with user
+
+#### Description
+
+The target user of the digital consultation must have the `conversation:internalMessaging:accept` permission.
+
+#### Endpoint
+
+`POST /api/v2/conversations/{conversationId}/participants/{participantId}/internalmessages/users/communications`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversation ID
+- `participantId` - **(string, required)** participant ID
+- `body` - **([MessagingConferWithUserRequest](../definitions/messagingconferwithuserrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` | [MessagingConferResponse](../definitions/messagingconferresponse-definition.md) | Accepted |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -6261,6 +7142,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postConversationsCallParticipantsUserUserId`
+
+Add participants to a conversation on behalf of a user
+
+#### Endpoint
+
+`POST /api/v2/conversations/calls/{conversationId}/participants/user/{userId}`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `userId` - **(string, required)** userId
+- `body` - **([Conversation](../definitions/conversation-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [Conversation](../definitions/conversation-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postConversationsCalls`
 
 Create a call conversation
@@ -6294,6 +7209,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postConversationsCallsUserUserId`
+
+Create a call conversation on behalf of a user
+
+#### Endpoint
+
+`POST /api/v2/conversations/calls/user/{userId}`
+
+#### Parameters
+
+- `userId` - **(string, required)** userId
+- `body` - **([CreateCallRequest](../definitions/createcallrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CreateCallResponse](../definitions/createcallresponse-definition.md) | successful operation |
+| `202` | [CreateCallResponse](../definitions/createcallresponse-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postConversationsChatCommunicationMessages`
 
 Send a message on behalf of a communication in a chat conversation.
@@ -6303,7 +7252,7 @@ Send a message on behalf of a communication in a chat conversation.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -6344,7 +7293,7 @@ Send a typing-indicator on behalf of a communication in a chat conversation.
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -6384,7 +7333,7 @@ Apply wrap-up for this conversation communication
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -6426,7 +7375,7 @@ Replace this participant with the specified user and/or address
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -6467,7 +7416,7 @@ Create a web chat conversation
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -6506,7 +7455,7 @@ Apply wrap-up for this conversation communication
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -6548,7 +7497,7 @@ Replace this participant with the specified user and/or address
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -6752,6 +7701,10 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 Reconnect the user to the most recently disconnected customer on a fully disconnected email conversation
 
+#### Description
+
+This request is not valid when using the Client Credentials OAuth grant.
+
 #### Endpoint
 
 `POST /api/v2/conversations/emails/{conversationId}/reconnect`
@@ -6950,7 +7903,7 @@ Send message
 
 #### Description
 
-Send message on existing conversation/communication. Only one message body field can be accepted, per request. Example: 1 textBody, 1 mediaId, 1 stickerId, or 1 messageTemplate.
+Send message on existing conversation/communication. Only one message body field can be accepted, per request. Example: 1 textBody, 1 mediaId, or 1 messageTemplate.
 
 #### Endpoint
 
@@ -6961,7 +7914,7 @@ Send message on existing conversation/communication. Only one message body field
 - `conversationId` - **(string, required)** conversationId
 - `communicationId` - **(string, required)** communicationId
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media, stickers)
+- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media)
 - `body` - **([AdditionalMessage](../definitions/additionalmessage-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
@@ -6989,6 +7942,9 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 Create media
 
+> [!WARNING]
+> This method is deprecated and may be removed in the future.
+
 #### Description
 
 See https://developer.genesys.cloud/api/rest/v2/conversations/messaging-media-upload for example usage.
@@ -7009,6 +7965,83 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `202` | [MessageMediaData](../definitions/messagemediadata-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postConversationsMessageCommunicationMessagesMediaUploads`
+
+Create a URL to upload a message media file
+
+#### Description
+
+See https://developer.genesys.cloud/api/rest/v2/conversations/messaging-media-upload for example usage.
+
+#### Endpoint
+
+`POST /api/v2/conversations/messages/{conversationId}/communications/{communicationId}/messages/media/uploads`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `body` - **([UploadMediaRequest](../definitions/uploadmediarequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MessageMediaUploadData](../definitions/messagemediauploaddata-definition.md) | Pre-signed url successfully created. |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postConversationsMessageCommunicationSocialmediaMessages`
+
+Send a social media message
+
+#### Description
+
+Send a social media message on existing conversation/communication.
+
+#### Endpoint
+
+`POST /api/v2/conversations/messages/{conversationId}/communications/{communicationId}/socialmedia/messages`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** conversationId
+- `communicationId` - **(string, required)** communicationId
+- `body` - **([AdditionalSocialMediaMessage](../definitions/additionalsocialmediamessage-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SocialMediaMessageData](../definitions/socialmediamessagedata-definition.md) | successful operation |
+| `202` | [SocialMediaMessageData](../definitions/socialmediamessagedata-definition.md) | Accepted |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -7176,13 +8209,51 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postConversationsMessageInboundOpenStructuredResponse`
+
+Send inbound Open Response
+
+#### Description
+
+Send an inbound response for a structured message to an Open Messaging integration. In order to call this endpoint you will need OAuth token generated using OAuth client credentials authorized with at least messaging scope. This will be a part of an existing conversation. See https://developer.genesys.cloud/api/digital/openmessaging/ for example usage.
+
+#### Endpoint
+
+`POST /api/v2/conversations/messages/{integrationId}/inbound/open/structured/response`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** integrationId
+- `body` - **([OpenInboundStructuredResponseMessage](../definitions/openinboundstructuredresponsemessage-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [OpenStructuredResponseNormalizedMessage](../definitions/openstructuredresponsenormalizedmessage-definition.md) | successful operation |
+| `202` | [OpenStructuredResponseNormalizedMessage](../definitions/openstructuredresponsenormalizedmessage-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postConversationsMessageMessagesBulk`
 
 Get messages in batch
 
 #### Description
 
-The path parameter [conversationId] should contain the conversationId of the conversation being filtered. The body should contain the messageId(s) of messages being requested. For example: ["a3069a33b-bbb1-4703-9d68-061d9e9db96e", "55bc6be3-078c-4a49-a4e6-1e05776ed7e8"]
+The path parameter [conversationId] should contain the conversationId of the conversation being filtered. The body should contain the messageId(s) of messages being requested. For example: ["a3069a33b-bbb1-4703-9d68-061d9e9db96e", "55bc6be3-078c-4a49-a4e6-1e05776ed7e8"]. The max messages you can request in the body is 1,000. Best practice is to limit to only the messages you need in each request, rather than request large batches by default.
 
 #### Endpoint
 
@@ -7192,7 +8263,7 @@ The path parameter [conversationId] should contain the conversationId of the con
 
 - `conversationId` - **(string, required)** 
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media, stickers)
+- `query.useNormalizedMessage` - **(boolean, optional)** If true, response removes deprecated fields (textBody, media)
 - `body` - **(string[], optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
@@ -7419,6 +8490,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 |---|---|---|
 | `200` | [OpenNormalizedMessage](../definitions/opennormalizedmessage-definition.md) | successful operation |
 | `202` | [OpenNormalizedMessage](../definitions/opennormalizedmessage-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postConversationsMessagingIntegrationsApple`
+
+Create Apple Integration
+
+#### Endpoint
+
+`POST /api/v2/conversations/messaging/integrations/apple`
+
+#### Parameters
+
+- `body` - **([AppleIntegrationRequest](../definitions/appleintegrationrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIntegration](../definitions/appleintegration-definition.md) | successful operation |
+| `202` | [AppleIntegration](../definitions/appleintegration-definition.md) | Accepted - If async is true, the integration creation in progress. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -7752,7 +8856,7 @@ Apply wrap-up for this conversation communication
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -7963,6 +9067,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postConversationsVideosMeetings`
+
+Generate a meetingId for a given conferenceId
+
+#### Endpoint
+
+`POST /api/v2/conversations/videos/meetings`
+
+#### Parameters
+
+- `body` - **([GenerateMeetingIdRequest](../definitions/generatemeetingidrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MeetingIdRecord](../definitions/meetingidrecord-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putConversationParticipantFlaggedreason`
 
 Set flagged reason on conversation participant to indicate bad conversation quality.
@@ -8108,7 +9244,7 @@ Update a conversation by setting its recording state
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-removal-of-acd-web-chat-version-2/.
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-removal-of-acd-web-chat-version-2/.
 
 #### Endpoint
 
@@ -8149,7 +9285,7 @@ Update a conversation by setting its recording state
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -8348,6 +9484,210 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `putConversationsMessagingIdentityresolutionIntegrationsAppleIntegrationId`
+
+Create an identity resolution settings for a Apple messaging integration
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/apple/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([AppleIdentityResolutionConfig](../definitions/appleidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AppleIdentityResolutionConfig](../definitions/appleidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putConversationsMessagingIdentityresolutionIntegrationsFacebookIntegrationId`
+
+Create an identity resolution settings for a Facebook messaging integration
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/facebook/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([FacebookIdentityResolutionConfig](../definitions/facebookidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [FacebookIdentityResolutionConfig](../definitions/facebookidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putConversationsMessagingIdentityresolutionIntegrationsInstagramIntegrationId`
+
+Create identity resolution settings for an Instagram messaging integration
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/instagram/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([InstagramIdentityResolutionConfig](../definitions/instagramidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InstagramIdentityResolutionConfig](../definitions/instagramidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putConversationsMessagingIdentityresolutionIntegrationsOpenIntegrationId`
+
+Update an open messaging integration Identity Resolution settings
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/open/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([OpenMessagingIdentityResolutionConfig](../definitions/openmessagingidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [OpenMessagingIdentityResolutionConfig](../definitions/openmessagingidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putConversationsMessagingIdentityresolutionIntegrationsTwitterIntegrationId`
+
+Create an identity resolution settings for an X (Formally Twitter) messaging integration
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/twitter/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration Id
+- `body` - **([TwitterIdentityResolutionConfig](../definitions/twitteridentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [TwitterIdentityResolutionConfig](../definitions/twitteridentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putConversationsMessagingIdentityresolutionIntegrationsWhatsappIntegrationId`
+
+Update a whatsApp integration Identity Resolution settings
+
+#### Endpoint
+
+`PUT /api/v2/conversations/messaging/identityresolution/integrations/whatsapp/{integrationId}`
+
+#### Parameters
+
+- `integrationId` - **(string, required)** Integration ID
+- `body` - **([WhatsAppIdentityResolutionConfig](../definitions/whatsappidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WhatsAppIdentityResolutionConfig](../definitions/whatsappidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putConversationsMessagingSettingsDefault`
 
 Set the organization's default setting that may be applied to to integrations without settings
@@ -8465,7 +9805,7 @@ Update a conversation by setting its recording state
 
 #### Description
 
-This endpoint is deprecated. Please see the article https://help.mypurecloud.com/articles/deprecation-legacy-co-browse-and-screenshare/
+This endpoint is deprecated. Please see the article https://help.genesys.cloud/articles/deprecation-legacy-co-browse-and-screenshare/
 
 #### Endpoint
 
@@ -8601,4 +9941,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.355Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.626Z*

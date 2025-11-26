@@ -15,7 +15,11 @@ Task Management
 - [`deleteTaskmanagementWorktypeFlowsOncreateRule`](#deletetaskmanagementworktypeflowsoncreaterule) - Delete a rule
 - [`deleteTaskmanagementWorktypeStatus`](#deletetaskmanagementworktypestatus) - Delete a status
 - [`getTaskmanagementWorkbin`](#gettaskmanagementworkbin) - Get a workbin
+- [`getTaskmanagementWorkbinHistory`](#gettaskmanagementworkbinhistory) - Get a listing of a workbin's attribute change history
+- [`getTaskmanagementWorkbinVersion`](#gettaskmanagementworkbinversion) - Get a version of a workbin
+- [`getTaskmanagementWorkbinVersions`](#gettaskmanagementworkbinversions) - Get all versions of a workbin
 - [`getTaskmanagementWorkitem`](#gettaskmanagementworkitem) - Get a workitem
+- [`getTaskmanagementWorkitemHistory`](#gettaskmanagementworkitemhistory) - Get a listing of a workitem's attribute change history
 - [`getTaskmanagementWorkitemsBulkAddJob`](#gettaskmanagementworkitemsbulkaddjob) - Get the bulk add job associated with the job id.
 - [`getTaskmanagementWorkitemsBulkAddJobResults`](#gettaskmanagementworkitemsbulkaddjobresults) - Get bulk add job results.
 - [`getTaskmanagementWorkitemsBulkJobsUsersMe`](#gettaskmanagementworkitemsbulkjobsusersme) - Get bulk jobs created by the currently logged in user.
@@ -25,12 +29,14 @@ Task Management
 - [`getTaskmanagementWorkitemsQueryJobResults`](#gettaskmanagementworkitemsqueryjobresults) - Get results from for workitem query job 
 - [`getTaskmanagementWorkitemsSchema`](#gettaskmanagementworkitemsschema) - Get a schema
 - [`getTaskmanagementWorkitemsSchemas`](#gettaskmanagementworkitemsschemas) - Get a list of schemas.
-- [`getTaskmanagementWorkitemsSchemasCoretype`](#gettaskmanagementworkitemsschemascoretype) - Get the core types from which all schemas are built.
+- [`getTaskmanagementWorkitemsSchemasCoretype`](#gettaskmanagementworkitemsschemascoretype) - Get a specific named core type.
 - [`getTaskmanagementWorkitemsSchemasCoretypes`](#gettaskmanagementworkitemsschemascoretypes) - Get the core types from which all schemas are built.
 - [`getTaskmanagementWorkitemsSchemasLimits`](#gettaskmanagementworkitemsschemaslimits) - Get quantitative limits on schemas
 - [`getTaskmanagementWorkitemsSchemaVersion`](#gettaskmanagementworkitemsschemaversion) - Get a specific version of a schema
 - [`getTaskmanagementWorkitemsSchemaVersions`](#gettaskmanagementworkitemsschemaversions) - Get all versions of a schema
 - [`getTaskmanagementWorkitemUserWrapups`](#gettaskmanagementworkitemuserwrapups) - Get all wrapup codes added for the given user for a workitem.
+- [`getTaskmanagementWorkitemVersion`](#gettaskmanagementworkitemversion) - Get a version of a workitem
+- [`getTaskmanagementWorkitemVersions`](#gettaskmanagementworkitemversions) - Get all versions of a workitem
 - [`getTaskmanagementWorkitemWrapups`](#gettaskmanagementworkitemwrapups) - Get all wrapup codes added for all users for a workitem.
 - [`getTaskmanagementWorktype`](#gettaskmanagementworktype) - Get a worktype
 - [`getTaskmanagementWorktypeFlowsDatebasedRule`](#gettaskmanagementworktypeflowsdatebasedrule) - Get a date based rule
@@ -39,8 +45,11 @@ Task Management
 - [`getTaskmanagementWorktypeFlowsOnattributechangeRules`](#gettaskmanagementworktypeflowsonattributechangerules) - Get all attribute-change rules for a worktype
 - [`getTaskmanagementWorktypeFlowsOncreateRule`](#gettaskmanagementworktypeflowsoncreaterule) - Get an on-create rule
 - [`getTaskmanagementWorktypeFlowsOncreateRules`](#gettaskmanagementworktypeflowsoncreaterules) - Get all on-create rules for a worktype
+- [`getTaskmanagementWorktypeHistory`](#gettaskmanagementworktypehistory) - Get a listing of a worktype's attribute change history
 - [`getTaskmanagementWorktypeStatus`](#gettaskmanagementworktypestatus) - Get a status
 - [`getTaskmanagementWorktypeStatuses`](#gettaskmanagementworktypestatuses) - Get list of statuses for this worktype.
+- [`getTaskmanagementWorktypeVersion`](#gettaskmanagementworktypeversion) - Get a version of a worktype
+- [`getTaskmanagementWorktypeVersions`](#gettaskmanagementworktypeversions) - Get all versions of a worktype
 - [`patchTaskmanagementWorkbin`](#patchtaskmanagementworkbin) - Update the attributes of a workbin
 - [`patchTaskmanagementWorkitem`](#patchtaskmanagementworkitem) - Update the attributes of a workitem
 - [`patchTaskmanagementWorkitemAssignment`](#patchtaskmanagementworkitemassignment) - Attempts to manually assign a specified workitem to a specified user.  Ignores bullseye ring, PAR score, skills, and languages.
@@ -427,6 +436,111 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getTaskmanagementWorkbinHistory`
+
+Get a listing of a workbin's attribute change history
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workbins/{workbinId}/history`
+
+#### Parameters
+
+- `workbinId` - **(string, required)** Workbin ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkbinChangeListing](../definitions/workbinchangelisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorkbinVersion`
+
+Get a version of a workbin
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workbins/{workbinId}/versions/{entityVersion}`
+
+#### Parameters
+
+- `workbinId` - **(string, required)** Workbin ID
+- `entityVersion` - **(number, required)** Workbin version
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkbinVersion](../definitions/workbinversion-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorkbinVersions`
+
+Get all versions of a workbin
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workbins/{workbinId}/versions`
+
+#### Parameters
+
+- `workbinId` - **(string, required)** Workbin ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkbinVersionListing](../definitions/workbinversionlisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getTaskmanagementWorkitem`
 
 Get a workitem
@@ -439,7 +553,7 @@ Get a workitem
 
 - `workitemId` - **(string, required)** Workitem ID
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.expands` - **(string, optional)** Which fields to expand. Comma separated if more than one.
+- `query.expands` - **(string[], optional)** Which fields to expand. Comma separated if more than one.
 
 #### Returns
 
@@ -448,6 +562,42 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [Workitem](../definitions/workitem-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorkitemHistory`
+
+Get a listing of a workitem's attribute change history
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workitems/{workitemId}/history`
+
+#### Parameters
+
+- `workitemId` - **(string, required)** Workitem ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkitemChangeListing](../definitions/workitemchangelisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -756,7 +906,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `getTaskmanagementWorkitemsSchemasCoretype`
 
-Get the core types from which all schemas are built.
+Get a specific named core type.
 
 #### Endpoint
 
@@ -804,7 +954,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [Coretype](../definitions/coretype-definition.md) | successful operation |
+| `200` | [CoretypeListing](../definitions/coretypelisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -902,7 +1052,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [DataSchema](../definitions/dataschema-definition.md) | successful operation |
+| `200` | [DataSchemaListing](../definitions/dataschemalisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -941,7 +1091,76 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [WorkitemWrapup](../definitions/workitemwrapup-definition.md) | successful operation |
+| `200` | [WorkitemWrapupEntityListing](../definitions/workitemwrapupentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorkitemVersion`
+
+Get a version of a workitem
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workitems/{workitemId}/versions/{entityVersion}`
+
+#### Parameters
+
+- `workitemId` - **(string, required)** Workitem ID
+- `entityVersion` - **(number, required)** Workitem version
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkitemVersion](../definitions/workitemversion-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorkitemVersions`
+
+Get all versions of a workitem
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/workitems/{workitemId}/versions`
+
+#### Parameters
+
+- `workitemId` - **(string, required)** Workitem ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorkitemVersionListing](../definitions/workitemversionlisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1230,6 +1449,43 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getTaskmanagementWorktypeHistory`
+
+Get a listing of a worktype's attribute change history
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/worktypes/{worktypeId}/history`
+
+#### Parameters
+
+- `worktypeId` - **(string, required)** Worktype id
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+- `query.fields` - **(string[], optional)** Comma-separated list of fields. The response will contain only versions created as a result of changes to these fields.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorktypeChangeListing](../definitions/worktypechangelisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getTaskmanagementWorktypeStatus`
 
 Get a status
@@ -1282,6 +1538,75 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [WorkitemStatusListing](../definitions/workitemstatuslisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorktypeVersion`
+
+Get a version of a worktype
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/worktypes/{worktypeId}/versions/{entityVersion}`
+
+#### Parameters
+
+- `worktypeId` - **(string, required)** Worktype id
+- `entityVersion` - **(number, required)** Worktype version
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorktypeVersion](../definitions/worktypeversion-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getTaskmanagementWorktypeVersions`
+
+Get all versions of a worktype
+
+#### Endpoint
+
+`GET /api/v2/taskmanagement/worktypes/{worktypeId}/versions`
+
+#### Parameters
+
+- `worktypeId` - **(string, required)** Worktype id
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.after` - **(string, optional)** The cursor that points to the end of the set of entities that has been returned.
+- `query.pageSize` - **(number, optional)** Limit the number of entities to return. It is not guaranteed that the requested number of entities will be filled in a single request. If an `after` key is returned as part of the response it is possible that more entities that match the filter criteria exist. Maximum of 200.
+- `query.sortOrder` - **(string, optional)** Ascending or descending sort order
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WorktypeVersionListing](../definitions/worktypeversionlisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1480,7 +1805,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [WorkitemWrapup](../definitions/workitemwrapup-definition.md) | successful operation |
+| `204` |  | Wrapup code updated successfully |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1514,7 +1839,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [WorkitemWrapup](../definitions/workitemwrapup-definition.md) | successful operation |
+| `204` |  | Wrapup code updated successfully |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -2261,4 +2586,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.440Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.689Z*

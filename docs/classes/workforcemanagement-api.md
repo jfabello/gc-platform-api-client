@@ -6,6 +6,7 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 
 - [`deleteWorkforcemanagementBusinessunit`](#deleteworkforcemanagementbusinessunit) - Delete business unit
 - [`deleteWorkforcemanagementBusinessunitActivitycode`](#deleteworkforcemanagementbusinessunitactivitycode) - Deletes an activity code
+- [`deleteWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocationshistory`](#deleteworkforcemanagementbusinessunitcapacityplanstaffinggroupallocationshistory) - Delete staffing group allocations history created for a capacity plan before the given date
 - [`deleteWorkforcemanagementBusinessunitPlanninggroup`](#deleteworkforcemanagementbusinessunitplanninggroup) - Deletes the planning group
 - [`deleteWorkforcemanagementBusinessunitSchedulingRun`](#deleteworkforcemanagementbusinessunitschedulingrun) - Cancel a scheduling run
 - [`deleteWorkforcemanagementBusinessunitServicegoaltemplate`](#deleteworkforcemanagementbusinessunitservicegoaltemplate) - Delete a service goal template
@@ -29,6 +30,7 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`getWorkforcemanagementAdherenceHistoricalJob`](#getworkforcemanagementadherencehistoricaljob) - Query the status of a historical adherence request operation. Only the user who started the operation can query the status
 - [`getWorkforcemanagementAgentAdherenceExplanation`](#getworkforcemanagementagentadherenceexplanation) - Get an adherence explanation
 - [`getWorkforcemanagementAgentManagementunit`](#getworkforcemanagementagentmanagementunit) - Get the management unit to which the agent belongs
+- [`getWorkforcemanagementAgentsMeAdherenceHistoricalJob`](#getworkforcemanagementagentsmeadherencehistoricaljob) - Request to fetch the status of the agent adherence job. Only the user who started the operation can query the status
 - [`getWorkforcemanagementAgentsMeManagementunit`](#getworkforcemanagementagentsmemanagementunit) - Get the management unit to which the currently logged in agent belongs
 - [`getWorkforcemanagementAlternativeshiftsOffersJob`](#getworkforcemanagementalternativeshiftsoffersjob) - Query the status of an alternative shift offers operation. Only the user who started the operation can query the status
 - [`getWorkforcemanagementAlternativeshiftsOffersSearchJob`](#getworkforcemanagementalternativeshiftsofferssearchjob) - Query the status of an alternative shift search offers operation. Only the user who started the operation can query the status
@@ -47,6 +49,11 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`getWorkforcemanagementBusinessunitAlternativeshiftsSettings`](#getworkforcemanagementbusinessunitalternativeshiftssettings) - Get alternative shifts settings for a business unit
 - [`getWorkforcemanagementBusinessunitAlternativeshiftsTrade`](#getworkforcemanagementbusinessunitalternativeshiftstrade) - Get an alternative shifts trade in a business unit for a given trade ID
 - [`getWorkforcemanagementBusinessunitAlternativeshiftsTradesSearchJob`](#getworkforcemanagementbusinessunitalternativeshiftstradessearchjob) - Query the status of an alternative shift search trade operation. Only the user who started the operation can query the status
+- [`getWorkforcemanagementBusinessunitCapacityplan`](#getworkforcemanagementbusinessunitcapacityplan) - Get a capacity plan
+- [`getWorkforcemanagementBusinessunitCapacityplanningLongtermrequirementsAutomaticbestmethodWeekForecast`](#getworkforcemanagementbusinessunitcapacityplanninglongtermrequirementsautomaticbestmethodweekforecast) - Get the latest long term staffing requirements for a business unit
+- [`getWorkforcemanagementBusinessunitCapacityplans`](#getworkforcemanagementbusinessunitcapacityplans) - Get list of capacity plans for a business unit
+- [`getWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocations`](#getworkforcemanagementbusinessunitcapacityplanstaffinggroupallocations) - Get a capacity plan's staffing group allocations
+- [`getWorkforcemanagementBusinessunitCapacityplanStaffingrequirements`](#getworkforcemanagementbusinessunitcapacityplanstaffingrequirements) - Get a capacity plan's staffing requirements
 - [`getWorkforcemanagementBusinessunitIntradayPlanninggroups`](#getworkforcemanagementbusinessunitintradayplanninggroups) - Get intraday planning groups for the given date
 - [`getWorkforcemanagementBusinessunitManagementunits`](#getworkforcemanagementbusinessunitmanagementunits) - Get all authorized management units in the business unit
 - [`getWorkforcemanagementBusinessunitPlanninggroup`](#getworkforcemanagementbusinessunitplanninggroup) - Get a planning group
@@ -87,7 +94,6 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`getWorkforcemanagementCalendarUrlIcs`](#getworkforcemanagementcalendarurlics) - Get existing calendar link for the current user
 - [`getWorkforcemanagementHistoricaldataBulkRemoveJob`](#getworkforcemanagementhistoricaldatabulkremovejob) - Retrieves delete job status for historical data imports associated with the job id
 - [`getWorkforcemanagementHistoricaldataBulkRemoveJobs`](#getworkforcemanagementhistoricaldatabulkremovejobs) - Retrieves all delete job status for historical data
-- [`getWorkforcemanagementHistoricaldataDeletejob`](#getworkforcemanagementhistoricaldatadeletejob) - Retrieves delete job status for historical data imports of the organization.
 - [`getWorkforcemanagementHistoricaldataImportstatus`](#getworkforcemanagementhistoricaldataimportstatus) - Retrieves status of the historical data imports of the organization
 - [`getWorkforcemanagementHistoricaldataImportstatusJobId`](#getworkforcemanagementhistoricaldataimportstatusjobid) - Retrieves status of the historical data imports associated with job id
 - [`getWorkforcemanagementIntegrationsHris`](#getworkforcemanagementintegrationshris) - Get integrations
@@ -120,6 +126,7 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`getWorkforcemanagementSchedulingjob`](#getworkforcemanagementschedulingjob) - Get status of the scheduling job
 - [`getWorkforcemanagementShifttrades`](#getworkforcemanagementshifttrades) - Gets all of my shift trades
 - [`getWorkforcemanagementShrinkageJob`](#getworkforcemanagementshrinkagejob) - Request to fetch the status of the historical shrinkage query
+- [`getWorkforcemanagementTeamAdherence`](#getworkforcemanagementteamadherence) - Get a list of user schedule adherence records for the requested team
 - [`getWorkforcemanagementTimeoffbalanceJob`](#getworkforcemanagementtimeoffbalancejob) - Query the results of time off types job
 - [`getWorkforcemanagementTimeoffrequest`](#getworkforcemanagementtimeoffrequest) - Get a time off request for the current user
 - [`getWorkforcemanagementTimeoffrequests`](#getworkforcemanagementtimeoffrequests) - Get a list of time off requests for the current user
@@ -135,6 +142,7 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`patchWorkforcemanagementBusinessunitActivitycode`](#patchworkforcemanagementbusinessunitactivitycode) - Update an activity code
 - [`patchWorkforcemanagementBusinessunitActivityplan`](#patchworkforcemanagementbusinessunitactivityplan) - Update an activity plan
 - [`patchWorkforcemanagementBusinessunitAlternativeshiftsSettings`](#patchworkforcemanagementbusinessunitalternativeshiftssettings) - Update alternative shifts settings for a business unit
+- [`patchWorkforcemanagementBusinessunitCapacityplan`](#patchworkforcemanagementbusinessunitcapacityplan) - Update a capacity plan configuration
 - [`patchWorkforcemanagementBusinessunitPlanninggroup`](#patchworkforcemanagementbusinessunitplanninggroup) - Updates the planning group
 - [`patchWorkforcemanagementBusinessunitSchedulingRun`](#patchworkforcemanagementbusinessunitschedulingrun) - Mark a schedule run as applied
 - [`patchWorkforcemanagementBusinessunitServicegoaltemplate`](#patchworkforcemanagementbusinessunitservicegoaltemplate) - Updates a service goal template
@@ -164,8 +172,10 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`postWorkforcemanagementAgentAdherenceExplanations`](#postworkforcemanagementagentadherenceexplanations) - Add an adherence explanation for the requested user
 - [`postWorkforcemanagementAgentAdherenceExplanationsQuery`](#postworkforcemanagementagentadherenceexplanationsquery) - Query adherence explanations for the given agent across a specified range
 - [`postWorkforcemanagementAgents`](#postworkforcemanagementagents) - Move agents in and out of management unit
+- [`postWorkforcemanagementAgentschedulesManagementunitsMine`](#postworkforcemanagementagentschedulesmanagementunitsmine) - Fetch agent schedules for the logged in user's management unit
 - [`postWorkforcemanagementAgentschedulesMine`](#postworkforcemanagementagentschedulesmine) - Get published schedule for the current user
 - [`postWorkforcemanagementAgentsIntegrationsHrisQuery`](#postworkforcemanagementagentsintegrationshrisquery) - Query integrations for agents
+- [`postWorkforcemanagementAgentsMeAdherenceHistoricalJobs`](#postworkforcemanagementagentsmeadherencehistoricaljobs) - Request an agent historical adherence report
 - [`postWorkforcemanagementAgentsMePossibleworkshifts`](#postworkforcemanagementagentsmepossibleworkshifts) - Get agent possible work shifts for requested time frame
 - [`postWorkforcemanagementAlternativeshiftsOffersJobs`](#postworkforcemanagementalternativeshiftsoffersjobs) - Request a list of alternative shift offers for a given schedule
 - [`postWorkforcemanagementAlternativeshiftsOffersSearchJobs`](#postworkforcemanagementalternativeshiftsofferssearchjobs) - Request a search of alternative shift offers for a given shift
@@ -176,11 +186,19 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`postWorkforcemanagementBusinessunitAdherenceExplanationsQuery`](#postworkforcemanagementbusinessunitadherenceexplanationsquery) - Query adherence explanations across an entire business unit for the requested period
 - [`postWorkforcemanagementBusinessunitAgentschedulesSearch`](#postworkforcemanagementbusinessunitagentschedulessearch) - Search published schedules
 - [`postWorkforcemanagementBusinessunitAlternativeshiftsTradesSearch`](#postworkforcemanagementbusinessunitalternativeshiftstradessearch) - List alternative shifts trades for a given management unit or agent
+- [`postWorkforcemanagementBusinessunitCapacityplanCopy`](#postworkforcemanagementbusinessunitcapacityplancopy) - Copy a capacity plan
+- [`postWorkforcemanagementBusinessunitCapacityplanningLongtermrequirementsAutomaticbestmethodWeekForecastForceregenerate`](#postworkforcemanagementbusinessunitcapacityplanninglongtermrequirementsautomaticbestmethodweekforecastforceregenerate) - Force regenerate the latest long term staffing requirements for a business unit
+- [`postWorkforcemanagementBusinessunitCapacityplanRequirementGenerate`](#postworkforcemanagementbusinessunitcapacityplanrequirementgenerate) - Regenerate requirements for capacity plan
+- [`postWorkforcemanagementBusinessunitCapacityplans`](#postworkforcemanagementbusinessunitcapacityplans) - Create a new capacity plan
+- [`postWorkforcemanagementBusinessunitCapacityplansBulkRemove`](#postworkforcemanagementbusinessunitcapacityplansbulkremove) - Delete capacity plans in a business unit
+- [`postWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocations`](#postworkforcemanagementbusinessunitcapacityplanstaffinggroupallocations) - Create staffing group allocations for a capacity plan
+- [`postWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocationshistoryQuery`](#postworkforcemanagementbusinessunitcapacityplanstaffinggroupallocationshistoryquery) - Query staffing groups allocations history for a capacity plan
 - [`postWorkforcemanagementBusinessunitIntraday`](#postworkforcemanagementbusinessunitintraday) - Get intraday data for the given date for the requested planningGroupIds
 - [`postWorkforcemanagementBusinessunitPlanninggroups`](#postworkforcemanagementbusinessunitplanninggroups) - Adds a new planning group
 - [`postWorkforcemanagementBusinessunits`](#postworkforcemanagementbusinessunits) - Add a new business unit
 - [`postWorkforcemanagementBusinessunitServicegoaltemplates`](#postworkforcemanagementbusinessunitservicegoaltemplates) - Adds a new service goal template
 - [`postWorkforcemanagementBusinessunitStaffinggroups`](#postworkforcemanagementbusinessunitstaffinggroups) - Creates a new staffing group
+- [`postWorkforcemanagementBusinessunitStaffinggroupsPlanninggroupsQuery`](#postworkforcemanagementbusinessunitstaffinggroupsplanninggroupsquery) - Gets a list of planning group to staffing groups list association
 - [`postWorkforcemanagementBusinessunitStaffinggroupsQuery`](#postworkforcemanagementbusinessunitstaffinggroupsquery) - Gets staffing group associations for a list of user IDs
 - [`postWorkforcemanagementBusinessunitTimeofflimits`](#postworkforcemanagementbusinessunittimeofflimits) - Creates a new time-off limit object
 - [`postWorkforcemanagementBusinessunitTimeofflimitsValuesQuery`](#postworkforcemanagementbusinessunittimeofflimitsvaluesquery) - Retrieves time-off limit related values based on a given set of filters.
@@ -205,7 +223,6 @@ Adherence, Schedules, Forecasts, Intraday Monitoring, Time Off Requests, Configu
 - [`postWorkforcemanagementBusinessunitWorkplanbids`](#postworkforcemanagementbusinessunitworkplanbids) - Create a new work plan bid
 - [`postWorkforcemanagementCalendarUrlIcs`](#postworkforcemanagementcalendarurlics) - Create a newly generated calendar link for the current user; if the current user has previously generated one, the generated link will be returned
 - [`postWorkforcemanagementHistoricaldataBulkRemoveJobs`](#postworkforcemanagementhistoricaldatabulkremovejobs) - Delete the list of the historical data import entries
-- [`postWorkforcemanagementHistoricaldataDeletejob`](#postworkforcemanagementhistoricaldatadeletejob) - Delete the entries of the historical data imports in the organization.
 - [`postWorkforcemanagementHistoricaldataValidate`](#postworkforcemanagementhistoricaldatavalidate) - Trigger validation process for historical import
 - [`postWorkforcemanagementIntegrationsHriTimeofftypesJobs`](#postworkforcemanagementintegrationshritimeofftypesjobs) - Get list of time off types configured in integration
 - [`postWorkforcemanagementManagementunitAgentschedulesSearch`](#postworkforcemanagementmanagementunitagentschedulessearch) - Query published schedules for given given time range for set of users
@@ -303,6 +320,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `204` |  | The activity code was deleted successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `deleteWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocationshistory`
+
+Delete staffing group allocations history created for a capacity plan before the given date
+
+#### Endpoint
+
+`DELETE /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/staffinggroupallocationshistory`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.beforeDateId` - **(string, optional)** The date to delete records that are created on or before this date in yyyy-MM-dd format. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | The capacity plan staffing group allocations were deleted successfully |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1088,6 +1140,42 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getWorkforcemanagementAgentsMeAdherenceHistoricalJob`
+
+Request to fetch the status of the agent adherence job. Only the user who started the operation can query the status
+
+#### Description
+
+Job details are only retained if the initial request returned a 202 ACCEPTED response
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/agents/me/adherence/historical/jobs/{jobId}`
+
+#### Parameters
+
+- `jobId` - **(string, required)** ID of the job to get
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WfmAgentHistoricalAdherenceResponse](../definitions/wfmagenthistoricaladherenceresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getWorkforcemanagementAgentsMeManagementunit`
 
 Get the management unit to which the currently logged in agent belongs
@@ -1379,6 +1467,7 @@ Expanding "settings" will retrieve all settings.  All other expands will retriev
 - `businessUnitId` - **(string, required)** The ID of the business unit, or 'mine' for the business unit of the logged-in user.
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.expand` - **(string[], optional)** Include to access additional data on the business unit
+- `query.includeSchedulingDefaultMessageSeverities` - **(boolean, optional)** Whether to include scheduling default message severities
 
 #### Returns
 
@@ -1689,6 +1778,171 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [BuAlternativeShiftJobResponse](../definitions/bualternativeshiftjobresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementBusinessunitCapacityplan`
+
+Get a capacity plan
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanResponse](../definitions/capacityplanresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementBusinessunitCapacityplanningLongtermrequirementsAutomaticbestmethodWeekForecast`
+
+Get the latest long term staffing requirements for a business unit
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplanning/longtermrequirements/automaticbestmethod/weeks/{weekDateId}/forecasts/{forecastId}`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** 
+- `weekDateId` - **(string, required)** weekDateId of forecast, format yyyy-MM-dd. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
+- `forecastId` - **(string, required)** forecastId of forecast
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [LongTermRequirementsResponse](../definitions/longtermrequirementsresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementBusinessunitCapacityplans`
+
+Get list of capacity plans for a business unit
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlansListResponse](../definitions/capacityplanslistresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocations`
+
+Get a capacity plan's staffing group allocations
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/staffinggroupallocations`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanStaffingGroupAllocationsResponse](../definitions/capacityplanstaffinggroupallocationsresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementBusinessunitCapacityplanStaffingrequirements`
+
+Get a capacity plan's staffing requirements
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/staffingrequirements`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanStaffingRequirementResult](../definitions/capacityplanstaffingrequirementresult-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -2119,6 +2373,7 @@ Gets a list of staffing groups
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.managementUnitId` - **(string, optional)** The ID of the management unit to get management unit specific staffing groups
+- `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
 
 #### Returns
 
@@ -2766,6 +3021,7 @@ Get the staffing requirement by planning group for a forecast
 - `forecastId` - **(string, required)** The ID of the forecast
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.weekNumbers` - **(string[], optional)** The week numbers to fetch (for multi-week forecasts) staffing requirements. Returns all week data if the list is not specified
+- `query.expand` - **(string[], optional)** Expand to include minimum staffing values in (staffing requirement response or applied to base staffing requirement values)
 
 #### Returns
 
@@ -3069,45 +3325,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [HistoricalImportOverallDeleteStatusResponse](../definitions/historicalimportoveralldeletestatusresponse-definition.md) | successful operation |
-| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
-| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
-| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
-| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
-| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
-| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
-| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
-| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
-| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
-| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
-| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
-
-### `getWorkforcemanagementHistoricaldataDeletejob`
-
-Retrieves delete job status for historical data imports of the organization.
-
-> [!WARNING]
-> This method is deprecated and may be removed in the future.
-
-#### Description
-
-Deprecated: Please use GET /workforcemanagement/historicaldata/bulk/remove/jobs instead.
-
-#### Endpoint
-
-`GET /api/v2/workforcemanagement/historicaldata/deletejob`
-
-#### Parameters
-
-This method does not have any parameters.
-
-#### Returns
-
-A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
-
-| HTTP Status Code | Returned type | Description |
-|---|---|---|
-| `200` | [HistoricalImportDeleteJobResponse](../definitions/historicalimportdeletejobresponse-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -3924,6 +4141,7 @@ Gets all the shift trades for a given week
 - `weekDateId` - **(string, required)** The start week date of the initiating shift in yyyy-MM-dd format. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.evaluateMatches` - **(boolean, optional)** Whether to evaluate the matches for violations
+- `query.includeCrossWeekShifts` - **(boolean, optional)** Whether to include all shift trades with either the initiating shift or the receiving shift in the week
 - `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
 
 #### Returns
@@ -4206,6 +4424,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [WfmHistoricalShrinkageResponse](../definitions/wfmhistoricalshrinkageresponse-definition.md) | Accepted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getWorkforcemanagementTeamAdherence`
+
+Get a list of user schedule adherence records for the requested team
+
+#### Endpoint
+
+`GET /api/v2/workforcemanagement/teams/{teamId}/adherence`
+
+#### Parameters
+
+- `teamId` - **(string, required)** The ID of the team
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [UserScheduleAdherenceListing](../definitions/userscheduleadherencelisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -4521,7 +4771,7 @@ Update my alternative shifts trade by trade ID
 #### Parameters
 
 - `tradeId` - **(string, required)** The ID of the alternative shift trade
-- `body` - **([AgentUpdateAlternativeShiftTradeRequest](../definitions/agentupdatealternativeshifttraderequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AgentUpdateAlternativeShiftTradeRequest](../definitions/agentupdatealternativeshifttraderequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4587,7 +4837,9 @@ Update business unit
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit, or 'mine' for the business unit of the logged-in user.
-- `body` - **([UpdateBusinessUnitRequest](../definitions/updatebusinessunitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.includeSchedulingDefaultMessageSeverities` - **(boolean, optional)** Whether to include scheduling default message severities
+- `body` - **([UpdateBusinessUnitRequest](../definitions/updatebusinessunitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4621,7 +4873,7 @@ Update an activity code
 
 - `businessUnitId` - **(string, required)** The ID of the business unit, or 'mine' for the business unit of the logged-in user.
 - `activityCodeId` - **(string, required)** The ID of the activity code to update
-- `body` - **([UpdateActivityCodeRequest](../definitions/updateactivitycoderequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateActivityCodeRequest](../definitions/updateactivitycoderequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4692,7 +4944,7 @@ Update alternative shifts settings for a business unit
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([UpdateAlternativeShiftBuSettingsRequest](../definitions/updatealternativeshiftbusettingsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateAlternativeShiftBuSettingsRequest](../definitions/updatealternativeshiftbusettingsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4701,6 +4953,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [AlternativeShiftBuSettingsResponse](../definitions/alternativeshiftbusettingsresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `patchWorkforcemanagementBusinessunitCapacityplan`
+
+Update a capacity plan configuration
+
+#### Endpoint
+
+`PATCH /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+- `body` - **([UpdateCapacityPlanRequest](../definitions/updatecapacityplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanResponse](../definitions/capacityplanresponse-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -4726,7 +5012,7 @@ Updates the planning group
 
 - `businessUnitId` - **(string, required)** The ID of the business unit.
 - `planningGroupId` - **(string, required)** The ID of a planning group to update
-- `body` - **([UpdatePlanningGroupRequest](../definitions/updateplanninggrouprequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdatePlanningGroupRequest](../definitions/updateplanninggrouprequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4760,7 +5046,7 @@ Mark a schedule run as applied
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `runId` - **(string, required)** The ID of the schedule run
-- `body` - **([PatchBuScheduleRunRequest](../definitions/patchbuschedulerunrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([PatchBuScheduleRunRequest](../definitions/patchbuschedulerunrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4794,7 +5080,7 @@ Updates a service goal template
 
 - `businessUnitId` - **(string, required)** The ID of the business unit.
 - `serviceGoalTemplateId` - **(string, required)** The ID of a service goal template to update
-- `body` - **([UpdateServiceGoalTemplate](../definitions/updateservicegoaltemplate-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateServiceGoalTemplate](../definitions/updateservicegoaltemplate-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4828,7 +5114,7 @@ Updates a staffing group
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `staffingGroupId` - **(string, required)** The ID of the staffing group to update
-- `body` - **([UpdateStaffingGroupRequest](../definitions/updatestaffinggrouprequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateStaffingGroupRequest](../definitions/updatestaffinggrouprequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4862,7 +5148,7 @@ Updates a time-off plan
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `timeOffPlanId` - **(string, required)** The ID of the time-off plan to update
-- `body` - **([BuUpdateTimeOffPlanRequest](../definitions/buupdatetimeoffplanrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuUpdateTimeOffPlanRequest](../definitions/buupdatetimeoffplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4931,7 +5217,7 @@ Update a bid group by bid group Id
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `bidId` - **(string, required)** The work plan bid id of the bid groups
 - `bidGroupId` - **(string, required)** Work Plan Bid Group id
-- `body` - **([WorkPlanBidGroupUpdate](../definitions/workplanbidgroupupdate-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WorkPlanBidGroupUpdate](../definitions/workplanbidgroupupdate-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4966,7 +5252,7 @@ Overrides the assigned work plan for the specified agents
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `bidId` - **(string, required)** The work plan bid id of the bid groups
 - `bidGroupId` - **(string, required)** The ID of the work plan bid group
-- `body` - **([AgentsBidAssignedWorkPlanOverrideRequest](../definitions/agentsbidassignedworkplanoverriderequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AgentsBidAssignedWorkPlanOverrideRequest](../definitions/agentsbidassignedworkplanoverriderequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4999,7 +5285,7 @@ Update the requested management unit
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([UpdateManagementUnitRequest](../definitions/updatemanagementunitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateManagementUnitRequest](../definitions/updatemanagementunitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5032,7 +5318,7 @@ Update agent configurations
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([UpdateMuAgentsRequest](../definitions/updatemuagentsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateMuAgentsRequest](../definitions/updatemuagentsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5065,7 +5351,7 @@ Updates agent work plan configuration
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([UpdateMuAgentWorkPlansBatchRequest](../definitions/updatemuagentworkplansbatchrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateMuAgentWorkPlansBatchRequest](../definitions/updatemuagentworkplansbatchrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5103,7 +5389,7 @@ Updates time off limit object properties, but not daily values.
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
 - `timeOffLimitId` - **(string, required)** The id of time off limit object to update
-- `body` - **([UpdateTimeOffLimitRequest](../definitions/updatetimeofflimitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateTimeOffLimitRequest](../definitions/updatetimeofflimitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5137,7 +5423,7 @@ Updates a time off plan
 
 - `managementUnitId` - **(string, required)** The ID of the management unit
 - `timeOffPlanId` - **(string, required)** The ID of the time off plan to update
-- `body` - **([UpdateTimeOffPlanRequest](../definitions/updatetimeoffplanrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateTimeOffPlanRequest](../definitions/updatetimeoffplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5172,7 +5458,7 @@ Set integration status for a time off request.
 - `managementUnitId` - **(string, required)** The ID of the management unit.
 - `timeOffRequestId` - **(string, required)** The ID of the time off request.
 - `userId` - **(string, required)** The ID of user to whom the time off request belongs.
-- `body` - **([SetTimeOffIntegrationStatusRequest](../definitions/settimeoffintegrationstatusrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([SetTimeOffIntegrationStatusRequest](../definitions/settimeoffintegrationstatusrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5207,7 +5493,7 @@ Update a time off request
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `userId` - **(string, required)** The id of the user the requested time off request belongs to
 - `timeOffRequestId` - **(string, required)** The id of the time off request to update
-- `body` - **([AdminTimeOffRequestPatch](../definitions/admintimeoffrequestpatch-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AdminTimeOffRequestPatch](../definitions/admintimeoffrequestpatch-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5278,7 +5564,7 @@ Update a work plan
 - `workPlanId` - **(string, required)** The ID of the work plan to update
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.validationMode` - **(string, optional)** Allows to update work plan even if validation result is invalid
-- `body` - **([WorkPlan](../definitions/workplan-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WorkPlan](../definitions/workplan-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5312,7 +5598,7 @@ Update a work plan rotation
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `workPlanRotationId` - **(string, required)** The ID of the work plan rotation to update
-- `body` - **([UpdateWorkPlanRotationRequest](../definitions/updateworkplanrotationrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateWorkPlanRotationRequest](../definitions/updateworkplanrotationrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5345,7 +5631,7 @@ Update a time off request for the current user
 #### Parameters
 
 - `timeOffRequestId` - **(string, required)** The ID of the time off request
-- `body` - **([AgentTimeOffRequestPatch](../definitions/agenttimeoffrequestpatch-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AgentTimeOffRequestPatch](../definitions/agenttimeoffrequestpatch-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5410,7 +5696,7 @@ Update work plan bid ranks for a user
 #### Parameters
 
 - `userId` - **(string, required)** The userId to whom the work plan bid ranks apply.
-- `body` - **([WorkPlanBidRanks](../definitions/workplanbidranks-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WorkPlanBidRanks](../definitions/workplanbidranks-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5443,7 +5729,7 @@ Update an agent's work plan bidding preference
 #### Parameters
 
 - `bidId` - **(string, required)** The ID of the work plan bid
-- `body` - **([UpdateAgentWorkPlanBiddingPreference](../definitions/updateagentworkplanbiddingpreference-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateAgentWorkPlanBiddingPreference](../definitions/updateagentworkplanbiddingpreference-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5577,7 +5863,7 @@ Request a historical adherence report in bulk
 
 #### Parameters
 
-- `body` - **([WfmHistoricalAdherenceBulkQuery](../definitions/wfmhistoricaladherencebulkquery-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmHistoricalAdherenceBulkQuery](../definitions/wfmhistoricaladherencebulkquery-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5679,7 +5965,7 @@ Move agents in and out of management unit
 
 #### Parameters
 
-- `body` - **([MoveAgentsRequest](../definitions/moveagentsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([MoveAgentsRequest](../definitions/moveagentsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5688,6 +5974,42 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `202` | [MoveAgentsResponse](../definitions/moveagentsresponse-definition.md) | Processing request |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementAgentschedulesManagementunitsMine`
+
+Fetch agent schedules for the logged in user's management unit
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/agentschedules/managementunits/mine`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.forceAsync` - **(boolean, optional)** Force the result of this operation to be sent asynchronously via notification. For testing/app development purposes
+- `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
+- `body` - **([AgentMuScheduleQuery](../definitions/agentmuschedulequery-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [AgentMuQueryResponse](../definitions/agentmuqueryresponse-definition.md) | successful operation |
+| `202` | [AgentMuQueryResponse](../definitions/agentmuqueryresponse-definition.md) | The schedule query is processing |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -5711,7 +6033,7 @@ Get published schedule for the current user
 
 #### Parameters
 
-- `body` - **([BuGetCurrentAgentScheduleRequest](../definitions/bugetcurrentagentschedulerequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuGetCurrentAgentScheduleRequest](../definitions/bugetcurrentagentschedulerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5743,7 +6065,7 @@ Query integrations for agents
 
 #### Parameters
 
-- `body` - **([QueryAgentsIntegrationsRequest](../definitions/queryagentsintegrationsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([QueryAgentsIntegrationsRequest](../definitions/queryagentsintegrationsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -5752,6 +6074,44 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [AgentsIntegrationsListing](../definitions/agentsintegrationslisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementAgentsMeAdherenceHistoricalJobs`
+
+Request an agent historical adherence report
+
+#### Description
+
+The maximum supported range for historical adherence queries is 31 days, or 7 days when the expand query parameter includes any of the following: exceptionInfo, actuals, scheduledActivities
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/agents/me/adherence/historical/jobs`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand with. wfm:AgentHistoricalAdherenceConformance:view permission is required for conformance, and wfm:agentSchedule:view permission is required for scheduledActivities.
+- `body` - **([WfmHistoricalAdherenceQueryForAgent](../definitions/wfmhistoricaladherencequeryforagent-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` | [WfmAgentHistoricalAdherenceResponse](../definitions/wfmagenthistoricaladherenceresponse-definition.md) | Processing request |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -5907,7 +6267,7 @@ Create a new activity code
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit, or 'mine' for the business unit of the logged-in user.
-- `body` - **([CreateActivityCodeRequest](../definitions/createactivitycoderequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateActivityCodeRequest](../definitions/createactivitycoderequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6052,7 +6412,7 @@ Search published schedules
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.forceAsync` - **(boolean, optional)** Force the result of this operation to be sent asynchronously via notification. For testing/app development purposes
 - `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
-- `body` - **([BuSearchAgentSchedulesRequest](../definitions/busearchagentschedulesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuSearchAgentSchedulesRequest](../definitions/busearchagentschedulesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6110,6 +6470,242 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postWorkforcemanagementBusinessunitCapacityplanCopy`
+
+Copy a capacity plan
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/copy`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+- `body` - **([CopyCapacityPlanRequest](../definitions/copycapacityplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanResponse](../definitions/capacityplanresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplanningLongtermrequirementsAutomaticbestmethodWeekForecastForceregenerate`
+
+Force regenerate the latest long term staffing requirements for a business unit
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplanning/longtermrequirements/automaticbestmethod/weeks/{weekDateId}/forecasts/{forecastId}/forceregenerate`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** 
+- `weekDateId` - **(string, required)** weekDateId of forecast, format yyyy-MM-dd. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
+- `forecastId` - **(string, required)** forecastId of forecast
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [LongTermRequirementsResponse](../definitions/longtermrequirementsresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplanRequirementGenerate`
+
+Regenerate requirements for capacity plan
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/requirement/generate`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanStaffingRequirementResult](../definitions/capacityplanstaffingrequirementresult-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplans`
+
+Create a new capacity plan
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `body` - **([CapacityPlanRequest](../definitions/capacityplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanResponse](../definitions/capacityplanresponse-definition.md) | successful operation |
+| `201` | [CapacityPlanResponse](../definitions/capacityplanresponse-definition.md) | The capacity plan was successfully created |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplansBulkRemove`
+
+Delete capacity plans in a business unit
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/bulk/remove`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `body` - **([CapacityPlanDeleteRequest](../definitions/capacityplandeleterequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | The capacity plans were deleted successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocations`
+
+Create staffing group allocations for a capacity plan
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/staffinggroupallocations`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+- `body` - **([CreateCapacityPlanStaffingGroupMetricChangeRequest](../definitions/createcapacityplanstaffinggroupmetricchangerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `201` | [CapacityPlanStaffingGroupMetricChangeResponse](../definitions/capacityplanstaffinggroupmetricchangeresponse-definition.md) | The capacity plan staffing group allocations was successfully created |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitCapacityplanStaffinggroupallocationshistoryQuery`
+
+Query staffing groups allocations history for a capacity plan
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/capacityplans/{capacityPlanId}/staffinggroupallocationshistory/query`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `capacityPlanId` - **(string, required)** The ID of the capacity plan
+- `body` - **([QueryCapacityPlanStaffingGroupMetricChangeHistory](../definitions/querycapacityplanstaffinggroupmetricchangehistory-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CapacityPlanStaffingGroupMetricChangeHistoryListResponse](../definitions/capacityplanstaffinggroupmetricchangehistorylistresponse-definition.md) | Success |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postWorkforcemanagementBusinessunitIntraday`
 
 Get intraday data for the given date for the requested planningGroupIds
@@ -6123,7 +6719,7 @@ Get intraday data for the given date for the requested planningGroupIds
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.forceAsync` - **(boolean, optional)** Force the result of this operation to be sent asynchronously via notification.  For testing/app development purposes
-- `body` - **([IntradayPlanningGroupRequest](../definitions/intradayplanninggrouprequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([IntradayPlanningGroupRequest](../definitions/intradayplanninggrouprequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6156,7 +6752,7 @@ Adds a new planning group
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit.
-- `body` - **([CreatePlanningGroupRequest](../definitions/createplanninggrouprequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreatePlanningGroupRequest](../definitions/createplanninggrouprequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6193,7 +6789,9 @@ It may take a minute or two for a new business unit to be available for api oper
 
 #### Parameters
 
-- `body` - **([CreateBusinessUnitRequest](../definitions/createbusinessunitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.includeSchedulingDefaultMessageSeverities` - **(boolean, optional)** Whether to include scheduling default message severities
+- `body` - **([CreateBusinessUnitRequest](../definitions/createbusinessunitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6227,7 +6825,7 @@ Adds a new service goal template
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit.
-- `body` - **([CreateServiceGoalTemplate](../definitions/createservicegoaltemplate-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateServiceGoalTemplate](../definitions/createservicegoaltemplate-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6261,7 +6859,7 @@ Creates a new staffing group
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([CreateStaffingGroupRequest](../definitions/createstaffinggrouprequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateStaffingGroupRequest](../definitions/createstaffinggrouprequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6271,6 +6869,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 |---|---|---|
 | `200` | [StaffingGroupResponse](../definitions/staffinggroupresponse-definition.md) | successful operation |
 | `201` | [StaffingGroupResponse](../definitions/staffinggroupresponse-definition.md) | The staffing group was successfully created |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postWorkforcemanagementBusinessunitStaffinggroupsPlanninggroupsQuery`
+
+Gets a list of planning group to staffing groups list association
+
+#### Endpoint
+
+`POST /api/v2/workforcemanagement/businessunits/{businessUnitId}/staffinggroups/planninggroups/query`
+
+#### Parameters
+
+- `businessUnitId` - **(string, required)** The ID of the business unit
+- `body` - **([QueryPlanningGroupToStaffingGroupsRequest](../definitions/queryplanninggrouptostaffinggroupsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [PlanningGroupToStaffingGroupsListing](../definitions/planninggrouptostaffinggroupslisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -6295,7 +6926,9 @@ Gets staffing group associations for a list of user IDs
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([QueryUserStaffingGroupListRequest](../definitions/queryuserstaffinggrouplistrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service
+- `body` - **([QueryUserStaffingGroupListRequest](../definitions/queryuserstaffinggrouplistrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6328,7 +6961,7 @@ Creates a new time-off limit object
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([BuCreateTimeOffLimitRequest](../definitions/bucreatetimeofflimitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuCreateTimeOffLimitRequest](../definitions/bucreatetimeofflimitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6362,7 +6995,7 @@ Retrieves time-off limit related values based on a given set of filters.
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([QueryTimeOffLimitValuesRequest](../definitions/querytimeofflimitvaluesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([QueryTimeOffLimitValuesRequest](../definitions/querytimeofflimitvaluesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6395,7 +7028,7 @@ Creates a new time-off plan
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([BuCreateTimeOffPlanRequest](../definitions/bucreatetimeoffplanrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuCreateTimeOffPlanRequest](../definitions/bucreatetimeoffplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6506,7 +7139,7 @@ Request a daily recalculation of the performance prediction for the associated s
 - `businessUnitId` - **(string, required)** The ID of the business unit to which the performance prediction belongs
 - `weekId` - **(string, required)** First day of schedule week in yyyy-MM-dd format
 - `scheduleId` - **(string, required)** The ID of the schedule the performance prediction belongs to
-- `body` - **([WfmProcessUploadRequest](../definitions/wfmprocessuploadrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmProcessUploadRequest](../definitions/wfmprocessuploadrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6542,7 +7175,7 @@ Upload daily activity changes to be able to request a performance prediction rec
 - `businessUnitId` - **(string, required)** The ID of the business unit to which the performance prediction belongs
 - `weekId` - **(string, required)** First day of schedule week in yyyy-MM-dd format
 - `scheduleId` - **(string, required)** The ID of the schedule the performance prediction belongs to
-- `body` - **([UploadUrlRequestBody](../definitions/uploadurlrequestbody-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UploadUrlRequestBody](../definitions/uploadurlrequestbody-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -6996,7 +7629,7 @@ Copy a work plan bid
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `bidId` - **(string, required)** The ID of the work plan bid to copy
-- `body` - **([CopyWorkPlanBid](../definitions/copyworkplanbid-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CopyWorkPlanBid](../definitions/copyworkplanbid-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7031,7 +7664,7 @@ Add a bid group in a given work plan bid
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `bidId` - **(string, required)** The work plan bid id of the bid groups
-- `body` - **([WorkPlanBidGroupCreate](../definitions/workplanbidgroupcreate-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WorkPlanBidGroupCreate](../definitions/workplanbidgroupcreate-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7065,7 +7698,7 @@ Create a new work plan bid
 #### Parameters
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
-- `body` - **([CreateWorkPlanBid](../definitions/createworkplanbid-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateWorkPlanBid](../definitions/createworkplanbid-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7132,7 +7765,7 @@ Delete the list of the historical data import entries
 
 #### Parameters
 
-- `body` - **([HistoricalImportDeleteFilesJobRequest](../definitions/historicalimportdeletefilesjobrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([HistoricalImportDeleteFilesJobRequest](../definitions/historicalimportdeletefilesjobrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7141,45 +7774,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `202` | [HistoricalImportDeleteFilesJobResponse](../definitions/historicalimportdeletefilesjobresponse-definition.md) | Delete job is accepted. Try using get API to get the status. |
-| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
-| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
-| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
-| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
-| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
-| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
-| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
-| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
-| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
-| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
-| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
-
-### `postWorkforcemanagementHistoricaldataDeletejob`
-
-Delete the entries of the historical data imports in the organization.
-
-> [!WARNING]
-> This method is deprecated and may be removed in the future.
-
-#### Description
-
-Deprecated: Please use POST /workforcemanagement/historicaldata/bulk/remove/jobs instead.
-
-#### Endpoint
-
-`POST /api/v2/workforcemanagement/historicaldata/deletejob`
-
-#### Parameters
-
-This method does not have any parameters.
-
-#### Returns
-
-A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
-
-| HTTP Status Code | Returned type | Description |
-|---|---|---|
-| `202` | [HistoricalImportDeleteJobResponse](../definitions/historicalimportdeletejobresponse-definition.md) | Delete job is accepted. Try using get API to get the status. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -7203,7 +7797,7 @@ Trigger validation process for historical import
 
 #### Parameters
 
-- `body` - **([ValidationServiceRequest](../definitions/validationservicerequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([ValidationServiceRequest](../definitions/validationservicerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7272,7 +7866,7 @@ Query published schedules for given given time range for set of users
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.forceAsync` - **(boolean, optional)** Force the result of this operation to be sent asynchronously via notification. For testing/app development purposes
 - `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
-- `body` - **([BuSearchAgentSchedulesRequest](../definitions/busearchagentschedulesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuSearchAgentSchedulesRequest](../definitions/busearchagentschedulesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7307,7 +7901,7 @@ Get agents work plans configuration
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
-- `body` - **([GetAgentsWorkPlansRequest](../definitions/getagentsworkplansrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([GetAgentsWorkPlansRequest](../definitions/getagentsworkplansrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7344,7 +7938,7 @@ The maximum supported range for historical adherence queries is 31 days, or 7 da
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit
-- `body` - **([WfmHistoricalAdherenceQuery](../definitions/wfmhistoricaladherencequery-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmHistoricalAdherenceQuery](../definitions/wfmhistoricaladherencequery-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7381,7 +7975,7 @@ Returns status 200 if the management unit is already in the requested business u
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([MoveManagementUnitRequest](../definitions/movemanagementunitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([MoveManagementUnitRequest](../definitions/movemanagementunitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7418,7 +8012,7 @@ It may take a minute or two for a new management unit to be available for api op
 
 #### Parameters
 
-- `body` - **([CreateManagementUnitApiRequest](../definitions/createmanagementunitapirequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateManagementUnitApiRequest](../definitions/createmanagementunitapirequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7455,7 +8049,7 @@ Query published schedules for given given time range for set of users
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([UserListScheduleRequestBody](../definitions/userlistschedulerequestbody-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UserListScheduleRequestBody](../definitions/userlistschedulerequestbody-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7492,7 +8086,7 @@ The maximum supported range for historical shrinkage queries is up to 32 days. H
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit
-- `body` - **([WfmHistoricalShrinkageRequest](../definitions/wfmhistoricalshrinkagerequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmHistoricalShrinkageRequest](../definitions/wfmhistoricalshrinkagerequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7529,7 +8123,7 @@ Only one limit object is allowed under management unit, so an attempt to create 
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
-- `body` - **([CreateTimeOffLimitRequest](../definitions/createtimeofflimitrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateTimeOffLimitRequest](../definitions/createtimeofflimitrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7563,7 +8157,7 @@ Retrieves time off limit related values based on a given set of filters.
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
-- `body` - **([QueryTimeOffLimitValuesRequest](../definitions/querytimeofflimitvaluesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([QueryTimeOffLimitValuesRequest](../definitions/querytimeofflimitvaluesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7596,7 +8190,7 @@ Creates a new time off plan
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit
-- `body` - **([CreateTimeOffPlanRequest](../definitions/createtimeoffplanrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateTimeOffPlanRequest](../definitions/createtimeoffplanrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7630,7 +8224,7 @@ Create a new time off request
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([CreateAdminTimeOffRequest](../definitions/createadmintimeoffrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateAdminTimeOffRequest](../definitions/createadmintimeoffrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7663,7 +8257,7 @@ Retrieves integration statuses for a list of time off requests
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
-- `body` - **([QueryTimeOffIntegrationStatusRequest](../definitions/querytimeoffintegrationstatusrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([QueryTimeOffIntegrationStatusRequest](../definitions/querytimeoffintegrationstatusrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7702,7 +8296,7 @@ Request body requires one of the following: User ID is specified, statuses == [P
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.forceDownloadService` - **(boolean, optional)** Force the result of this operation to be sent via download service. For testing/app development purposes
-- `body` - **([TimeOffRequestQueryBody](../definitions/timeoffrequestquerybody-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([TimeOffRequestQueryBody](../definitions/timeoffrequestquerybody-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7735,7 +8329,7 @@ Retrieves daily waitlist position for a list of time off requests
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
-- `body` - **([QueryWaitlistPositionsRequest](../definitions/querywaitlistpositionsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([QueryWaitlistPositionsRequest](../definitions/querywaitlistpositionsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -7804,7 +8398,7 @@ Estimates available time off for an agent
 
 - `managementUnitId` - **(string, required)** The ID of the management unit
 - `userId` - **(string, required)** The id of the user for whom the time off request estimate is requested
-- `body` - **([EstimateAvailableTimeOffRequest](../definitions/estimateavailabletimeoffrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([EstimateAvailableTimeOffRequest](../definitions/estimateavailabletimeoffrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8019,7 +8613,7 @@ Create a copy of work plan
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `workPlanId` - **(string, required)** The ID of the work plan to create a copy
-- `body` - **([CopyWorkPlan](../definitions/copyworkplan-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CopyWorkPlan](../definitions/copyworkplan-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8053,7 +8647,7 @@ Create a copy of work plan rotation
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `workPlanRotationId` - **(string, required)** The ID of the work plan rotation to create a copy
-- `body` - **([CopyWorkPlanRotationRequest](../definitions/copyworkplanrotationrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CopyWorkPlanRotationRequest](../definitions/copyworkplanrotationrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8086,7 +8680,7 @@ Create a new work plan rotation
 #### Parameters
 
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
-- `body` - **([AddWorkPlanRotationRequest](../definitions/addworkplanrotationrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AddWorkPlanRotationRequest](../definitions/addworkplanrotationrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8122,7 +8716,7 @@ Create a new work plan
 - `managementUnitId` - **(string, required)** The ID of the management unit, or 'mine' for the management unit of the logged-in user.
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.validationMode` - **(string, optional)** Allows to create work plan even if the validation result is invalid
-- `body` - **([CreateWorkPlan](../definitions/createworkplan-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateWorkPlan](../definitions/createworkplan-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8158,7 +8752,7 @@ Validate Work Plan
 - `workPlanId` - **(string, required)** The ID of the work plan to validate. For new work plan, use the word 'new' for the ID.
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.expand` - **(string[], optional)** 
-- `body` - **([WorkPlanValidationRequest](../definitions/workplanvalidationrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WorkPlanValidationRequest](../definitions/workplanvalidationrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8190,7 +8784,7 @@ Mark a list of notifications as read or unread
 
 #### Parameters
 
-- `body` - **([UpdateNotificationsRequest](../definitions/updatenotificationsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([UpdateNotificationsRequest](../definitions/updatenotificationsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8262,7 +8856,7 @@ The maximum supported range for historical adherence queries is 31 days, or 7 da
 #### Parameters
 
 - `teamId` - **(string, required)** The ID of the team
-- `body` - **([WfmHistoricalAdherenceQueryForTeams](../definitions/wfmhistoricaladherencequeryforteams-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmHistoricalAdherenceQueryForTeams](../definitions/wfmhistoricaladherencequeryforteams-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8299,7 +8893,7 @@ The maximum supported range for historical shrinkage queries is up to 32 days
 #### Parameters
 
 - `teamId` - **(string, required)** The ID of the team
-- `body` - **([WfmHistoricalShrinkageTeamsRequest](../definitions/wfmhistoricalshrinkageteamsrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([WfmHistoricalShrinkageTeamsRequest](../definitions/wfmhistoricalshrinkageteamsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8364,7 +8958,7 @@ Queries available time off for the current user
 
 #### Parameters
 
-- `body` - **([AvailableTimeOffRequest](../definitions/availabletimeoffrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([AvailableTimeOffRequest](../definitions/availabletimeoffrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8396,7 +8990,7 @@ Create a time off request for the current user
 
 #### Parameters
 
-- `body` - **([CreateAgentTimeOffRequest](../definitions/createagenttimeoffrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CreateAgentTimeOffRequest](../definitions/createagenttimeoffrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8428,7 +9022,7 @@ Estimates available time off for current user
 
 #### Parameters
 
-- `body` - **([EstimateAvailableTimeOffRequest](../definitions/estimateavailabletimeoffrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([EstimateAvailableTimeOffRequest](../definitions/estimateavailabletimeoffrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8460,7 +9054,7 @@ Retrieves integration statuses for a list of current user time off requests
 
 #### Parameters
 
-- `body` - **([CurrentUserTimeOffIntegrationStatusRequest](../definitions/currentusertimeoffintegrationstatusrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([CurrentUserTimeOffIntegrationStatusRequest](../definitions/currentusertimeoffintegrationstatusrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8531,7 +9125,7 @@ Note that only limit daily values can be set through API, allocated and waitlist
 
 - `businessUnitId` - **(string, required)** The ID of the business unit
 - `timeOffLimitId` - **(string, required)** The ID of the time-off limit object to set values for
-- `body` - **([BuSetTimeOffLimitValuesRequest](../definitions/busettimeofflimitvaluesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([BuSetTimeOffLimitValuesRequest](../definitions/busettimeofflimitvaluesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8569,7 +9163,7 @@ Note that only limit daily values can be set through API, allocated and waitlist
 
 - `managementUnitId` - **(string, required)** The ID of the management unit.
 - `timeOffLimitId` - **(string, required)** The ID of the time off limit object to set values for
-- `body` - **([SetTimeOffLimitValuesRequest](../definitions/settimeofflimitvaluesrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([SetTimeOffLimitValuesRequest](../definitions/settimeofflimitvaluesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -8594,4 +9188,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.413Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.668Z*

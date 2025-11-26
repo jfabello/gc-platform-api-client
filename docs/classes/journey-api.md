@@ -11,6 +11,7 @@ Predictive Engagement, Customer Journey
 - [`deleteJourneySegment`](#deletejourneysegment) - Delete a segment.
 - [`deleteJourneyView`](#deletejourneyview) - Delete a Journey View by ID
 - [`deleteJourneyViewSchedules`](#deletejourneyviewschedules) - Delete the Schedule of a JourneyView
+- [`getExternalcontactsContactJourneySegments`](#getexternalcontactscontactjourneysegments) - Retrieve segment assignments by external contact ID.
 - [`getExternalcontactsContactJourneySessions`](#getexternalcontactscontactjourneysessions) - Retrieve all sessions for a given external contact.
 - [`getJourneyActionmap`](#getjourneyactionmap) - Retrieve a single action map.
 - [`getJourneyActionmaps`](#getjourneyactionmaps) - Retrieve all action maps.
@@ -37,6 +38,7 @@ Predictive Engagement, Customer Journey
 - [`getJourneyViewsEventdefinition`](#getjourneyviewseventdefinition) - Get an Event Definition
 - [`getJourneyViewsEventdefinitions`](#getjourneyviewseventdefinitions) - Get a list of Event Definitions
 - [`getJourneyViewsJobs`](#getjourneyviewsjobs) - Get the jobs for an organization.
+- [`getJourneyViewsJobsMe`](#getjourneyviewsjobsme) - Get my jobs
 - [`getJourneyViewsSchedules`](#getjourneyviewsschedules) - Get the journey schedules for an organization.
 - [`getJourneyViewVersion`](#getjourneyviewversion) - Get a Journey View by ID and version
 - [`getJourneyViewVersionChart`](#getjourneyviewversionchart) - Get a Chart by ID
@@ -52,6 +54,7 @@ Predictive Engagement, Customer Journey
 - [`patchJourneySegment`](#patchjourneysegment) - Update a segment.
 - [`patchJourneyViewVersionJob`](#patchjourneyviewversionjob) - Update the job for a journey view version. Only the status can be changed and only to Cancelled
 - [`postAnalyticsJourneysAggregatesQuery`](#postanalyticsjourneysaggregatesquery) - Query for journey aggregates
+- [`postExternalcontactsContactJourneySegments`](#postexternalcontactscontactjourneysegments) - Assign/Unassign up to 10 segments to/from an external contact or, if a segment is already assigned, update the expiry date of the segment assignment. Any unprocessed segment assignments are returned in the body for the client to retry, in the event of a partial success.
 - [`postJourneyActionmaps`](#postjourneyactionmaps) - Create an action map.
 - [`postJourneyActionmapsEstimatesJobs`](#postjourneyactionmapsestimatesjobs) - Query for estimates
 - [`postJourneyActiontemplates`](#postjourneyactiontemplates) - Create a single action template.
@@ -288,6 +291,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 |---|---|---|
 | `200` | [JourneyViewSchedule](../definitions/journeyviewschedule-definition.md) | successful operation |
 | `204` |  | Scheduling deleted successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getExternalcontactsContactJourneySegments`
+
+Retrieve segment assignments by external contact ID.
+
+#### Endpoint
+
+`GET /api/v2/externalcontacts/contacts/{contactId}/journey/segments`
+
+#### Parameters
+
+- `contactId` - **(string, required)** ExternalContact ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.includeMerged` - **(boolean, optional)** Indicates whether to return segment assignments from all external contacts in the merge-set of the given one.
+- `query.limit` - **(number, optional)** Number of entities to return. Default of 25, maximum of 500.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SegmentAssignmentListing](../definitions/segmentassignmentlisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1192,6 +1230,42 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getJourneyViewsJobsMe`
+
+Get my jobs
+
+#### Endpoint
+
+`GET /api/v2/journey/views/jobs/me`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.pageNumber` - **(number, optional)** The number of the page to return
+- `query.pageSize` - **(number, optional)** Max number of entities to return
+- `query.interval` - **(string, optional)** An absolute timeframe for filtering the jobs, expressed as an ISO 8601 interval.
+- `query.statuses` - **(string, optional)** Job statuses to filter for
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [JourneyViewJobListing](../definitions/journeyviewjoblisting-definition.md) | Request completed successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getJourneyViewsSchedules`
 
 Get the journey schedules for an organization.
@@ -1687,6 +1761,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [JourneyAggregateQueryResponse](../definitions/journeyaggregatequeryresponse-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postExternalcontactsContactJourneySegments`
+
+Assign/Unassign up to 10 segments to/from an external contact or, if a segment is already assigned, update the expiry date of the segment assignment. Any unprocessed segment assignments are returned in the body for the client to retry, in the event of a partial success.
+
+#### Endpoint
+
+`POST /api/v2/externalcontacts/contacts/{contactId}/journey/segments`
+
+#### Parameters
+
+- `contactId` - **(string, required)** ExternalContact ID
+- `body` - **([UpdateSegmentAssignmentRequest](../definitions/updatesegmentassignmentrequest-definition.md), optional)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [UpdateSegmentAssignmentResponse](../definitions/updatesegmentassignmentresponse-definition.md) | Request completed successfully or was partially successful. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -2276,4 +2383,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.365Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.635Z*

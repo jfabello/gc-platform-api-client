@@ -32,6 +32,7 @@
 - [`deleteOutboundSchedulesEmailcampaign`](#deleteoutboundschedulesemailcampaign) - Delete an email campaign schedule.
 - [`deleteOutboundSchedulesMessagingcampaign`](#deleteoutboundschedulesmessagingcampaign) - Delete a messaging campaign schedule.
 - [`deleteOutboundSchedulesSequence`](#deleteoutboundschedulessequence) - Delete a dialer sequence schedule.
+- [`deleteOutboundSchedulesWhatsappcampaign`](#deleteoutboundscheduleswhatsappcampaign) - Delete a WhatsApp campaign schedule.
 - [`deleteOutboundSequence`](#deleteoutboundsequence) - Delete a dialer campaign sequence.
 - [`getOutboundAttemptlimit`](#getoutboundattemptlimit) - Get attempt limits
 - [`getOutboundAttemptlimits`](#getoutboundattemptlimits) - Query attempt limits list
@@ -99,6 +100,8 @@
 - [`getOutboundSchedulesMessagingcampaigns`](#getoutboundschedulesmessagingcampaigns) - Query for a list of messaging campaign schedules.
 - [`getOutboundSchedulesSequence`](#getoutboundschedulessequence) - Get a dialer sequence schedule.
 - [`getOutboundSchedulesSequences`](#getoutboundschedulessequences) - Query for a list of dialer sequence schedules.
+- [`getOutboundSchedulesWhatsappcampaign`](#getoutboundscheduleswhatsappcampaign) - Get a WhatsApp campaign schedule.
+- [`getOutboundSchedulesWhatsappcampaigns`](#getoutboundscheduleswhatsappcampaigns) - Query for a list of WhatsApp campaign schedules.
 - [`getOutboundSequence`](#getoutboundsequence) - Get a dialer campaign sequence.
 - [`getOutboundSequences`](#getoutboundsequences) - Query a list of dialer campaign sequences.
 - [`getOutboundSettings`](#getoutboundsettings) - Get the outbound settings for this organization
@@ -116,6 +119,7 @@
 - [`postOutboundCampaignCallbackSchedule`](#postoutboundcampaigncallbackschedule) - Schedule a Callback for a Dialer Campaign (Deprecated)
 - [`postOutboundCampaignrules`](#postoutboundcampaignrules) - Create Campaign Rule
 - [`postOutboundCampaigns`](#postoutboundcampaigns) - Create a campaign.
+- [`postOutboundCampaignsPerformanceQuery`](#postoutboundcampaignsperformancequery) - Get performance data for a list of campaigns
 - [`postOutboundCampaignsProgress`](#postoutboundcampaignsprogress) - Get progress for a list of campaigns
 - [`postOutboundCampaignStart`](#postoutboundcampaignstart) - Start the campaign
 - [`postOutboundCampaignStop`](#postoutboundcampaignstop) - Stop the campaign
@@ -168,6 +172,7 @@
 - [`putOutboundSchedulesEmailcampaign`](#putoutboundschedulesemailcampaign) - Update an email campaign schedule.
 - [`putOutboundSchedulesMessagingcampaign`](#putoutboundschedulesmessagingcampaign) - Update a new messaging campaign schedule.
 - [`putOutboundSchedulesSequence`](#putoutboundschedulessequence) - Update a new sequence schedule.
+- [`putOutboundSchedulesWhatsappcampaign`](#putoutboundscheduleswhatsappcampaign) - Update a WhatsApp campaign schedule.
 - [`putOutboundSequence`](#putoutboundsequence) - Update a new campaign sequence.
 - [`putOutboundWrapupcodemappings`](#putoutboundwrapupcodemappings) - Update the Dialer wrap up code mapping.
 
@@ -1158,6 +1163,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` |  | Operation was successful. |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `deleteOutboundSchedulesWhatsappcampaign`
+
+Delete a WhatsApp campaign schedule.
+
+#### Endpoint
+
+`DELETE /api/v2/outbound/schedules/whatsappcampaigns/{whatsAppCampaignId}`
+
+#### Parameters
+
+- `whatsAppCampaignId` - **(string, required)** WhatsApp Campaign ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Operation was successful. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -3556,6 +3593,70 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getOutboundSchedulesWhatsappcampaign`
+
+Get a WhatsApp campaign schedule.
+
+#### Endpoint
+
+`GET /api/v2/outbound/schedules/whatsappcampaigns/{whatsAppCampaignId}`
+
+#### Parameters
+
+- `whatsAppCampaignId` - **(string, required)** WhatsApp Campaign ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WhatsAppCampaignSchedule](../definitions/whatsappcampaignschedule-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getOutboundSchedulesWhatsappcampaigns`
+
+Query for a list of WhatsApp campaign schedules.
+
+#### Endpoint
+
+`GET /api/v2/outbound/schedules/whatsappcampaigns`
+
+#### Parameters
+
+This method does not have any parameters.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WhatsAppCampaignScheduleEntityListing](../definitions/whatsappcampaignscheduleentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getOutboundSequence`
 
 Get a dialer campaign sequence.
@@ -4132,6 +4233,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [Campaign](../definitions/campaign-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postOutboundCampaignsPerformanceQuery`
+
+Get performance data for a list of campaigns
+
+#### Endpoint
+
+`POST /api/v2/outbound/campaigns/performance/query`
+
+#### Parameters
+
+- `body` - **(string[], required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CampaignPerformanceDataListing](../definitions/campaignperformancedatalisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -5880,6 +6013,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `putOutboundSchedulesWhatsappcampaign`
+
+Update a WhatsApp campaign schedule.
+
+#### Endpoint
+
+`PUT /api/v2/outbound/schedules/whatsappcampaigns/{whatsAppCampaignId}`
+
+#### Parameters
+
+- `whatsAppCampaignId` - **(string, required)** WhatsApp Campaign ID
+- `body` - **([WhatsAppCampaignSchedule](../definitions/whatsappcampaignschedule-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [WhatsAppCampaignSchedule](../definitions/whatsappcampaignschedule-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putOutboundSequence`
 
 Update a new campaign sequence.
@@ -5948,4 +6114,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.396Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.657Z*

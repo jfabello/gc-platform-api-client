@@ -34,13 +34,16 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`getRoutingAvailablemediatypes`](#getroutingavailablemediatypes) - Get available media types
 - [`getRoutingDirectroutingbackupSettingsMe`](#getroutingdirectroutingbackupsettingsme) - Get the user's Direct Routing Backup settings.
 - [`getRoutingEmailDomain`](#getroutingemaildomain) - Get domain
+- [`getRoutingEmailDomainDkim`](#getroutingemaildomaindkim) - Get domain dkim settings
+- [`getRoutingEmailDomainMailfrom`](#getroutingemaildomainmailfrom) - Get domain mail from settings
 - [`getRoutingEmailDomainRoute`](#getroutingemaildomainroute) - Get a route
+- [`getRoutingEmailDomainRouteIdentityresolution`](#getroutingemaildomainrouteidentityresolution) - Get a route identity resolution setting.
 - [`getRoutingEmailDomainRoutes`](#getroutingemaildomainroutes) - Get routes
 - [`getRoutingEmailDomains`](#getroutingemaildomains) - Get domains
+- [`getRoutingEmailDomainVerification`](#getroutingemaildomainverification) - Get domain verification settings
 - [`getRoutingEmailOutboundDomain`](#getroutingemailoutbounddomain) - Get domain
 - [`getRoutingEmailOutboundDomainActivation`](#getroutingemailoutbounddomainactivation) - Get activation status (cname + dkim) of an outbound domain
 - [`getRoutingEmailOutboundDomains`](#getroutingemailoutbounddomains) - Get outbound domains
-- [`getRoutingEmailOutboundDomainSearch`](#getroutingemailoutbounddomainsearch) - Search a domain across organizations
 - [`getRoutingEmailSetup`](#getroutingemailsetup) - Get email setup
 - [`getRoutingLanguage`](#getroutinglanguage) - Get a routing language
 - [`getRoutingLanguages`](#getroutinglanguages) - Get the list of supported languages.
@@ -56,6 +59,7 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`getRoutingQueueComparisonperiod`](#getroutingqueuecomparisonperiod) - Get a Comparison Period.
 - [`getRoutingQueueComparisonperiods`](#getroutingqueuecomparisonperiods) - Get list of comparison periods
 - [`getRoutingQueueEstimatedwaittime`](#getroutingqueueestimatedwaittime) - Get Estimated Wait Time
+- [`getRoutingQueueIdentityresolution`](#getroutingqueueidentityresolution) - Get Queue IdentityResolution Settings.
 - [`getRoutingQueueMediatypeEstimatedwaittime`](#getroutingqueuemediatypeestimatedwaittime) - Get Estimated Wait Time
 - [`getRoutingQueueMembers`](#getroutingqueuemembers) - Get the members of this queue.
 - [`getRoutingQueues`](#getroutingqueues) - Get list of queues.
@@ -76,6 +80,7 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`getRoutingSmsAddress`](#getroutingsmsaddress) - Get an Address by Id for SMS
 - [`getRoutingSmsAddresses`](#getroutingsmsaddresses) - Get a list of Addresses for SMS
 - [`getRoutingSmsAvailablephonenumbers`](#getroutingsmsavailablephonenumbers) - Get a list of available phone numbers for SMS provisioning.
+- [`getRoutingSmsIdentityresolutionPhonenumber`](#getroutingsmsidentityresolutionphonenumber) - Get a SMS identity resolution settings.
 - [`getRoutingSmsPhonenumber`](#getroutingsmsphonenumber) - Get a phone number provisioned for SMS.
 - [`getRoutingSmsPhonenumbers`](#getroutingsmsphonenumbers) - Get a list of provisioned phone numbers.
 - [`getRoutingUserDirectroutingbackupSettings`](#getroutinguserdirectroutingbackupsettings) - Get the user's Direct Routing Backup settings.
@@ -103,6 +108,7 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`patchRoutingSettingsContactcenter`](#patchroutingsettingscontactcenter) - Update Contact Center Settings
 - [`patchRoutingSettingsTranscription`](#patchroutingsettingstranscription) - Patch Transcription Settings
 - [`patchRoutingSkillgroup`](#patchroutingskillgroup) - Update skill group definition
+- [`patchRoutingSmsPhonenumber`](#patchroutingsmsphonenumber) - Update a phone number provisioned for SMS.
 - [`patchUserQueue`](#patchuserqueue) - Join or unjoin a queue for a user
 - [`patchUserQueues`](#patchuserqueues) - Join or unjoin a set of queues for a user
 - [`patchUserRoutinglanguage`](#patchuserroutinglanguage) - Update an assigned routing language's proficiency
@@ -112,9 +118,12 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`postAnalyticsRoutingActivityQuery`](#postanalyticsroutingactivityquery) - Query for user activity observations
 - [`postRoutingAssessments`](#postroutingassessments) - Create a benefit assessment.
 - [`postRoutingAssessmentsJobs`](#postroutingassessmentsjobs) - Create a benefit assessment job.
+- [`postRoutingEmailDomainDkim`](#postroutingemaildomaindkim) - Restart domain dkim
+- [`postRoutingEmailDomainMailfrom`](#postroutingemaildomainmailfrom) - Set domain mail from settings
 - [`postRoutingEmailDomainRoutes`](#postroutingemaildomainroutes) - Create a route
 - [`postRoutingEmailDomains`](#postroutingemaildomains) - Create a domain
-- [`postRoutingEmailDomainTestconnection`](#postroutingemaildomaintestconnection) - Tests the custom SMTP server integration connection set on this domain
+- [`postRoutingEmailDomainTestconnection`](#postroutingemaildomaintestconnection) - Tests the custom SMTP server integration connection set on this ACD domain
+- [`postRoutingEmailDomainVerification`](#postroutingemaildomainverification) - Restart domain verification
 - [`postRoutingEmailOutboundDomains`](#postroutingemailoutbounddomains) - Create a domain
 - [`postRoutingEmailOutboundDomainsSimulated`](#postroutingemailoutbounddomainssimulated) - Create a simulated domain
 - [`postRoutingLanguages`](#postroutinglanguages) - Create Language
@@ -135,11 +144,14 @@ Queues, wrapup codes, skills, email & sms config, predictive routing
 - [`postUserRoutingskills`](#postuserroutingskills) - Assign a routing skill to a user
 - [`putRoutingDirectroutingbackupSettingsMe`](#putroutingdirectroutingbackupsettingsme) - Update the user's Direct Routing Backup settings.
 - [`putRoutingEmailDomainRoute`](#putroutingemaildomainroute) - Update a route
+- [`putRoutingEmailDomainRouteIdentityresolution`](#putroutingemaildomainrouteidentityresolution) - Update identity resolution settings for a route.
 - [`putRoutingEmailOutboundDomainActivation`](#putroutingemailoutbounddomainactivation) - Request an activation status (cname + dkim) update of an outbound domain
 - [`putRoutingMessageRecipient`](#putroutingmessagerecipient) - Update a recipient
 - [`putRoutingQueue`](#putroutingqueue) - Update a queue
+- [`putRoutingQueueIdentityresolution`](#putroutingqueueidentityresolution) - Update Queue IdentityResolution Settings.
 - [`putRoutingSettings`](#putroutingsettings) - Update an organization's routing settings
 - [`putRoutingSettingsTranscription`](#putroutingsettingstranscription) - Update Transcription Settings
+- [`putRoutingSmsIdentityresolutionPhonenumber`](#putroutingsmsidentityresolutionphonenumber) - Update an SMS identity resolution settings.
 - [`putRoutingUserDirectroutingbackupSettings`](#putroutinguserdirectroutingbackupsettings) - Update the user's Direct Routing Backup settings.
 - [`putRoutingUserUtilization`](#putroutinguserutilization) - Update the user's max utilization settings.  Include only those media types requiring custom configuration.
 - [`putRoutingUtilization`](#putroutingutilization) - Update the organization-wide max utilization settings.  Include only those media types requiring custom configuration.
@@ -1108,6 +1120,8 @@ Get domain
 #### Parameters
 
 - `domainId` - **(string, required)** domain ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string, optional)** Expand options. Valid values: settings
 
 #### Returns
 
@@ -1116,6 +1130,70 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [InboundDomain](../definitions/inbounddomain-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getRoutingEmailDomainDkim`
+
+Get domain dkim settings
+
+#### Endpoint
+
+`GET /api/v2/routing/email/domains/{domainId}/dkim`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [VerificationResult](../definitions/verificationresult-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getRoutingEmailDomainMailfrom`
+
+Get domain mail from settings
+
+#### Endpoint
+
+`GET /api/v2/routing/email/domains/{domainId}/mailfrom`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MailFromResult](../definitions/mailfromresult-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1141,6 +1219,8 @@ Get a route
 
 - `domainName` - **(string, required)** email domain
 - `routeId` - **(string, required)** route ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -1149,6 +1229,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [InboundRoute](../definitions/inboundroute-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getRoutingEmailDomainRouteIdentityresolution`
+
+Get a route identity resolution setting.
+
+#### Endpoint
+
+`GET /api/v2/routing/email/domains/{domainName}/routes/{routeId}/identityresolution`
+
+#### Parameters
+
+- `domainName` - **(string, required)** email domain
+- `routeId` - **(string, required)** route ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [RouteIdentityResolutionConfig](../definitions/routeidentityresolutionconfig-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1177,6 +1290,7 @@ Get routes
 - `query.pageSize` - **(number, optional)** Page size
 - `query.pageNumber` - **(number, optional)** Page number
 - `query.pattern` - **(string, optional)** Filter routes by the route's pattern property
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -1213,6 +1327,7 @@ Get domains
 - `query.pageNumber` - **(number, optional)** Page number
 - `query.excludeStatus` - **(boolean, optional)** Exclude MX record data
 - `query.filter` - **(string, optional)** Optional search filter that, if defined, use the **filter** syntax, eg: **mySearchedPattern**. Note that **** is considered no filter.
+- `query.expand` - **(string, optional)** Expand options. Valid values: settings
 
 #### Returns
 
@@ -1221,6 +1336,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [InboundDomainEntityListing](../definitions/inbounddomainentitylisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getRoutingEmailDomainVerification`
+
+Get domain verification settings
+
+#### Endpoint
+
+`GET /api/v2/routing/email/domains/{domainId}/verification`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [VerificationResult](../definitions/verificationresult-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1245,6 +1392,8 @@ Get domain
 #### Parameters
 
 - `domainId` - **(string, required)** domain ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string, optional)** Expand options. Valid values: settings
 
 #### Returns
 
@@ -1312,6 +1461,7 @@ Get outbound domains
 - `query.pageSize` - **(number, optional)** Page size
 - `query.pageNumber` - **(number, optional)** Page number
 - `query.filter` - **(string, optional)** Optional search filter that, if defined, use the **filter** syntax, eg: **mySearchedPattern**. Note that **** is considered no filter.
+- `query.expand` - **(string, optional)** Expand options. Valid values: settings
 
 #### Returns
 
@@ -1320,38 +1470,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [OutboundDomainEntityListing](../definitions/outbounddomainentitylisting-definition.md) | successful operation |
-| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
-| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
-| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
-| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
-| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
-| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
-| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
-| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
-| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
-| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
-| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
-
-### `getRoutingEmailOutboundDomainSearch`
-
-Search a domain across organizations
-
-#### Endpoint
-
-`GET /api/v2/routing/email/outbound/domains/{domainId}/search`
-
-#### Parameters
-
-- `domainId` - **(string, required)** domain ID
-
-#### Returns
-
-A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
-
-| HTTP Status Code | Returned type | Description |
-|---|---|---|
-| `200` | [OutboundDomain](../definitions/outbounddomain-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1647,6 +1765,8 @@ Retrieve all predictors.
 - `query.limit` - **(string, optional)** Number of entities to return. Maximum of 200. Deprecated in favour of pageSize
 - `query.pageSize` - **(string, optional)** Number of entities to return. Maximum of 200.
 - `query.queueId` - **(string[], optional)** Comma-separated list of queue Ids to filter by.
+- `query.kpiId` - **(string, optional)** Standard or custom KPI id used to filter predictors.
+- `query.state` - **(string, optional)** The state used to filter predictors.
 
 #### Returns
 
@@ -1713,6 +1833,8 @@ Get details about this queue.
 #### Parameters
 
 - `queueId` - **(string, required)** Queue ID
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -1746,7 +1868,7 @@ Get an assistant associated with a queue.
 
 - `queueId` - **(string, required)** Queue ID
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
-- `query.expand` - **(string, optional)** Which fields, if any, to expand.
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand.
 
 #### Returns
 
@@ -1867,6 +1989,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getRoutingQueueIdentityresolution`
+
+Get Queue IdentityResolution Settings.
+
+#### Endpoint
+
+`GET /api/v2/routing/queues/{queueId}/identityresolution`
+
+#### Parameters
+
+- `queueId` - **(string, required)** Queue ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IdentityResolutionQueueConfig](../definitions/identityresolutionqueueconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getRoutingQueueMediatypeEstimatedwaittime`
 
 Get Estimated Wait Time
@@ -1967,6 +2121,7 @@ Get list of queues.
 - `query.peerId` - **(string[], optional)** Include only queues with the specified peer ID(s)
 - `query.cannedResponseLibraryId` - **(string, optional)** Include only queues explicitly associated with the specified canned response library ID
 - `query.hasPeer` - **(boolean, optional)** Include only queues with a peer ID
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -2159,6 +2314,7 @@ Get the wrap-up codes for a queue
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.pageSize` - **(number, optional)** Page size
 - `query.pageNumber` - **(number, optional)** Page number
+- `query.name` - **(string, optional)** Wrapup code's name (trailing asterisks allowed)
 
 #### Returns
 
@@ -2592,6 +2748,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getRoutingSmsIdentityresolutionPhonenumber`
+
+Get a SMS identity resolution settings.
+
+#### Endpoint
+
+`GET /api/v2/routing/sms/identityresolution/phonenumbers/{addressId}`
+
+#### Parameters
+
+- `addressId` - **(string, required)** Address ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SmsIdentityResolutionConfig](../definitions/smsidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getRoutingSmsPhonenumber`
 
 Get a phone number provisioned for SMS.
@@ -2648,6 +2836,7 @@ Get a list of provisioned phone numbers.
 - `query.language` - **(string, optional)** A language tag (which is sometimes referred to as a "locale identifier") to use to localize country field and sort operations
 - `query.integration.id` - **(string, optional)** Filter on the Genesys Cloud integration id to which the phone number belongs to
 - `query.supportedContent.id` - **(string, optional)** Filter based on the supported content ID
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -3529,6 +3718,39 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `patchRoutingSmsPhonenumber`
+
+Update a phone number provisioned for SMS.
+
+#### Endpoint
+
+`PATCH /api/v2/routing/sms/phonenumbers/{phoneNumberId}`
+
+#### Parameters
+
+- `phoneNumberId` - **(string, required)** phone number
+- `body` - **([SmsPhoneNumberPatchRequest](../definitions/smsphonenumberpatchrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SmsPhoneNumber](../definitions/smsphonenumber-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `patchUserQueue`
 
 Join or unjoin a queue for a user
@@ -3831,6 +4053,71 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postRoutingEmailDomainDkim`
+
+Restart domain dkim
+
+#### Endpoint
+
+`POST /api/v2/routing/email/domains/{domainId}/dkim`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [VerificationResult](../definitions/verificationresult-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postRoutingEmailDomainMailfrom`
+
+Set domain mail from settings
+
+#### Endpoint
+
+`POST /api/v2/routing/email/domains/{domainId}/mailfrom`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+- `body` - **([MailFromResult](../definitions/mailfromresult-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [MailFromResult](../definitions/mailfromresult-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postRoutingEmailDomainRoutes`
 
 Create a route
@@ -3875,7 +4162,7 @@ Create a domain
 
 #### Parameters
 
-- `body` - **([InboundDomain](../definitions/inbounddomain-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([InboundDomainCreateRequest](../definitions/inbounddomaincreaterequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -3899,11 +4186,11 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ### `postRoutingEmailDomainTestconnection`
 
-Tests the custom SMTP server integration connection set on this domain
+Tests the custom SMTP server integration connection set on this ACD domain
 
 #### Description
 
-The request body is optional. If omitted, this endpoint will just test the connection of the Custom SMTP Server. If the body is specified, there will be an attempt to send an email message to the server.
+The request body is optional. If omitted, this endpoint will just test the connection of the Custom SMTP Server used by the ACD domain. If the body is specified, there will be an attempt to send an email message to the server.
 
 #### Endpoint
 
@@ -3934,6 +4221,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postRoutingEmailDomainVerification`
+
+Restart domain verification
+
+#### Endpoint
+
+`POST /api/v2/routing/email/domains/{domainId}/verification`
+
+#### Parameters
+
+- `domainId` - **(string, required)** domain ID
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [VerificationResult](../definitions/verificationresult-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postRoutingEmailOutboundDomains`
 
 Create a domain
@@ -3944,7 +4263,7 @@ Create a domain
 
 #### Parameters
 
-- `body` - **([OutboundDomain](../definitions/outbounddomain-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([OutboundDomainCreateRequest](../definitions/outbounddomaincreaterequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -3976,7 +4295,7 @@ Create a simulated domain
 
 #### Parameters
 
-- `body` - **([OutboundDomain](../definitions/outbounddomain-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+- `body` - **([OutboundDomainCreateRequest](../definitions/outbounddomaincreaterequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
 
@@ -4594,6 +4913,41 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `putRoutingEmailDomainRouteIdentityresolution`
+
+Update identity resolution settings for a route.
+
+#### Endpoint
+
+`PUT /api/v2/routing/email/domains/{domainName}/routes/{routeId}/identityresolution`
+
+#### Parameters
+
+- `domainName` - **(string, required)** email domain
+- `routeId` - **(string, required)** route ID
+- `body` - **([RouteIdentityResolutionConfig](../definitions/routeidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [RouteIdentityResolutionConfig](../definitions/routeidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putRoutingEmailOutboundDomainActivation`
 
 Request an activation status (cname + dkim) update of an outbound domain
@@ -4692,6 +5046,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `putRoutingQueueIdentityresolution`
+
+Update Queue IdentityResolution Settings.
+
+#### Endpoint
+
+`PUT /api/v2/routing/queues/{queueId}/identityresolution`
+
+#### Parameters
+
+- `queueId` - **(string, required)** Queue ID
+- `body` - **([IdentityResolutionQueueConfig](../definitions/identityresolutionqueueconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IdentityResolutionQueueConfig](../definitions/identityresolutionqueueconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putRoutingSettings`
 
 Update an organization's routing settings
@@ -4752,6 +5140,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
 | `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
 | `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `putRoutingSmsIdentityresolutionPhonenumber`
+
+Update an SMS identity resolution settings.
+
+#### Endpoint
+
+`PUT /api/v2/routing/sms/identityresolution/phonenumbers/{addressId}`
+
+#### Parameters
+
+- `addressId` - **(string, required)** Address ID
+- `body` - **([SmsIdentityResolutionConfig](../definitions/smsidentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SmsIdentityResolutionConfig](../definitions/smsidentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
 | `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
 | `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
@@ -4991,4 +5413,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.368Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.637Z*

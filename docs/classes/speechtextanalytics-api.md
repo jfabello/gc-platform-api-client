@@ -14,6 +14,7 @@
 - [`getSpeechandtextanalyticsConversationCategories`](#getspeechandtextanalyticsconversationcategories) - Get the list of detected Speech and Text Analytics categories of conversation
 - [`getSpeechandtextanalyticsConversationCommunicationTranscripturl`](#getspeechandtextanalyticsconversationcommunicationtranscripturl) - Get the pre-signed S3 URL for the transcript of a specific communication of a conversation
 - [`getSpeechandtextanalyticsConversationCommunicationTranscripturls`](#getspeechandtextanalyticsconversationcommunicationtranscripturls) - Get the list of pre-signed S3 URL for the transcripts of a specific communication of a conversation
+- [`getSpeechandtextanalyticsConversationSentiments`](#getspeechandtextanalyticsconversationsentiments) - Get sentiment data
 - [`getSpeechandtextanalyticsConversationSummaries`](#getspeechandtextanalyticsconversationsummaries) - Get conversation summaries by conversation id.
 - [`getSpeechandtextanalyticsDictionaryfeedback`](#getspeechandtextanalyticsdictionaryfeedback) - Get the list of Speech & Text Analytics dictionary feedbacks
 - [`getSpeechandtextanalyticsDictionaryfeedbackDictionaryFeedbackId`](#getspeechandtextanalyticsdictionaryfeedbackdictionaryfeedbackid) - Get a Speech & Text Analytics dictionary feedback by id
@@ -37,6 +38,9 @@
 - [`getSpeechandtextanalyticsTopicsGeneral`](#getspeechandtextanalyticstopicsgeneral) - Get the Speech & Text Analytics general topics for a given dialect
 - [`getSpeechandtextanalyticsTopicsGeneralStatus`](#getspeechandtextanalyticstopicsgeneralstatus) - Get the list of general topics from the org and the system with their current status
 - [`getSpeechandtextanalyticsTopicsPublishjob`](#getspeechandtextanalyticstopicspublishjob) - Get a Speech & Text Analytics publish topics job by id
+- [`getSpeechandtextanalyticsTopicsTestphraseJob`](#getspeechandtextanalyticstopicstestphrasejob) - Get a Speech & Text Analytics test topics phrase job by id
+- [`getSpeechandtextanalyticsTranslationsLanguageConversation`](#getspeechandtextanalyticstranslationslanguageconversation) - Translate a single interaction recording (or an email conversation)
+- [`getSpeechandtextanalyticsTranslationsLanguages`](#getspeechandtextanalyticstranslationslanguages) - Get supported translation languages
 - [`patchSpeechandtextanalyticsSettings`](#patchspeechandtextanalyticssettings) - Patch Speech And Text Analytics Settings
 - [`postSpeechandtextanalyticsCategories`](#postspeechandtextanalyticscategories) - Create new Speech & Text Analytics category
 - [`postSpeechandtextanalyticsDictionaryfeedback`](#postspeechandtextanalyticsdictionaryfeedback) - Create a Speech & Text Analytics DictionaryFeedback
@@ -46,6 +50,7 @@
 - [`postSpeechandtextanalyticsSentimentfeedback`](#postspeechandtextanalyticssentimentfeedback) - Create a Speech & Text Analytics SentimentFeedback
 - [`postSpeechandtextanalyticsTopics`](#postspeechandtextanalyticstopics) - Create new Speech & Text Analytics topic
 - [`postSpeechandtextanalyticsTopicsPublishjobs`](#postspeechandtextanalyticstopicspublishjobs) - Create new Speech & Text Analytics publish topics job
+- [`postSpeechandtextanalyticsTopicsTestphraseJobs`](#postspeechandtextanalyticstopicstestphrasejobs) - Create new Speech & Text Analytics publish topics job
 - [`postSpeechandtextanalyticsTranscriptsSearch`](#postspeechandtextanalyticstranscriptssearch) - Search resources.
 - [`putSpeechandtextanalyticsCategory`](#putspeechandtextanalyticscategory) - Update a Speech & Text Analytics category by ID
 - [`putSpeechandtextanalyticsDictionaryfeedbackDictionaryFeedbackId`](#putspeechandtextanalyticsdictionaryfeedbackdictionaryfeedbackid) - Update existing Speech & Text Analytics dictionary feedback by id
@@ -441,6 +446,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [TranscriptUrls](../definitions/transcripturls-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getSpeechandtextanalyticsConversationSentiments`
+
+Get sentiment data
+
+#### Endpoint
+
+`GET /api/v2/speechandtextanalytics/conversations/{conversationId}/sentiments`
+
+#### Parameters
+
+- `conversationId` - **(string, required)** The conversation ID of the sentiment data
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [SentimentData](../definitions/sentimentdata-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1058,6 +1095,7 @@ Get the list of Speech & Text Analytics topics
 - `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
 - `query.nextPage` - **(string, optional)** The key for listing the next page
 - `query.pageSize` - **(number, optional)** The page size for the listing. The max that will be returned is 500.
+- `query.pageNumber` - **(number, optional)** The page number for the listing
 - `query.state` - **(string, optional)** Topic state. Defaults to latest
 - `query.name` - **(string, optional)** Case insensitive partial name to filter by
 - `query.ids` - **(string[], optional)** Comma separated Topic IDs to filter by. Cannot be used with other filters. Maximum of 50 IDs allowed.
@@ -1174,7 +1212,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
 | `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `405` | [ErrorBody](../definitions/errorbody-definition.md) | Method Not Allowed |
 | `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
 | `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
 | `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
@@ -1203,6 +1240,106 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [TopicJob](../definitions/topicjob-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getSpeechandtextanalyticsTopicsTestphraseJob`
+
+Get a Speech & Text Analytics test topics phrase job by id
+
+#### Endpoint
+
+`GET /api/v2/speechandtextanalytics/topics/testphrase/jobs/{jobId}`
+
+#### Parameters
+
+- `jobId` - **(string, required)** the id of the test topic phrase job
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [TestTopicPhraseJob](../definitions/testtopicphrasejob-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getSpeechandtextanalyticsTranslationsLanguageConversation`
+
+Translate a single interaction recording (or an email conversation)
+
+#### Endpoint
+
+`GET /api/v2/speechandtextanalytics/translations/languages/{languageId}/conversations/{conversationId}`
+
+#### Parameters
+
+- `languageId` - **(string, required)** Target translation language
+- `conversationId` - **(string, required)** Conversation id
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.communicationId` - **(string, optional)** Communication id associated with the conversation. Please provide a valid communicationId when requesting non-email interactions.
+- `query.recordingId` - **(string, optional)** Recording id associated with the communication. Please provide a valid recordingId when requesting voice interactions.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [CommunicationTranslationList](../definitions/communicationtranslationlist-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getSpeechandtextanalyticsTranslationsLanguages`
+
+Get supported translation languages
+
+#### Endpoint
+
+`GET /api/v2/speechandtextanalytics/translations/languages`
+
+#### Parameters
+
+This method does not have any parameters.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [TranslateSupportedLanguageList](../definitions/translatesupportedlanguagelist-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1497,6 +1634,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [TopicJob](../definitions/topicjob-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postSpeechandtextanalyticsTopicsTestphraseJobs`
+
+Create new Speech & Text Analytics publish topics job
+
+#### Endpoint
+
+`POST /api/v2/speechandtextanalytics/topics/testphrase/jobs`
+
+#### Parameters
+
+- `body` - **([TestTopicPhraseJobRequest](../definitions/testtopicphrasejobrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [TestTopicPhraseJobs](../definitions/testtopicphrasejobs-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1811,4 +1980,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.432Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.683Z*

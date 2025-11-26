@@ -18,6 +18,7 @@ Manage learning modules
 - [`getLearningModulesAssignments`](#getlearningmodulesassignments) - Get all learning modules of an organization including assignments for a specific user
 - [`getLearningModulesCoverartCoverArtId`](#getlearningmodulescoverartcoverartid) - Get a specific Learning Module cover art using ID
 - [`getLearningModuleVersion`](#getlearningmoduleversion) - Get specific version of a published module
+- [`getLearningScheduleslotsJob`](#getlearningscheduleslotsjob) - Retrieve the status of the job for the slots where a learning activity can be scheduled.
 - [`getLearningScormScormId`](#getlearningscormscormid) - Get Learning SCORM Result
 - [`patchLearningAssignment`](#patchlearningassignment) - Update Learning Assignment
 - [`patchLearningAssignmentReschedule`](#patchlearningassignmentreschedule) - Reschedule Learning Assignment
@@ -34,6 +35,7 @@ Manage learning modules
 - [`postLearningModulePublish`](#postlearningmodulepublish) - Publish a Learning module
 - [`postLearningModules`](#postlearningmodules) - Create a new learning module
 - [`postLearningRulesQuery`](#postlearningrulesquery) - Get users for learning module rule
+- [`postLearningScheduleslotsJobs`](#postlearningscheduleslotsjobs) - Start job to retrieve slots where a learning activity can be scheduled.
 - [`postLearningScheduleslotsQuery`](#postlearningscheduleslotsquery) - Get list of possible slots where a learning activity can be scheduled.
 - [`postLearningScorm`](#postlearningscorm) - Create a SCORM package upload request
 - [`putLearningModule`](#putlearningmodule) - Update a learning module
@@ -444,7 +446,7 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
-| `200` | [LearningModulesDomainEntityListing](../definitions/learningmodulesdomainentitylisting-definition.md) | successful operation |
+| `200` | [LearningModuleList](../definitions/learningmodulelist-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -551,6 +553,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [LearningModule](../definitions/learningmodule-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getLearningScheduleslotsJob`
+
+Retrieve the status of the job for the slots where a learning activity can be scheduled.
+
+#### Endpoint
+
+`GET /api/v2/learning/scheduleslots/jobs/{jobId}`
+
+#### Parameters
+
+- `jobId` - **(string, required)** The ID of the job
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [LearningScheduleSlotsJobResponse](../definitions/learningscheduleslotsjobresponse-definition.md) | Learning schedule slots job retrieved. |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1115,6 +1149,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postLearningScheduleslotsJobs`
+
+Start job to retrieve slots where a learning activity can be scheduled.
+
+#### Endpoint
+
+`POST /api/v2/learning/scheduleslots/jobs`
+
+#### Parameters
+
+- `body` - **([LearningScheduleSlotsJobRequest](../definitions/learningscheduleslotsjobrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `202` | [LearningScheduleSlotsJobResponse](../definitions/learningscheduleslotsjobresponse-definition.md) | Learning schedule slots job accepted. |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postLearningScheduleslotsQuery`
 
 Get list of possible slots where a learning activity can be scheduled.
@@ -1268,6 +1334,8 @@ This will update a learning module rule with the specified fields.
 #### Parameters
 
 - `moduleId` - **(string, required)** The ID of the learning module
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.assign` - **(boolean, optional)** Whether to assign the module to users or not
 - `body` - **([LearningModuleRule](../definitions/learningmodulerule-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
 
 #### Returns
@@ -1293,4 +1361,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.443Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.691Z*

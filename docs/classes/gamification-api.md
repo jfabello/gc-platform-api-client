@@ -20,6 +20,7 @@ Gamification, Scorecard, and leaderboard
 - [`getGamificationInsightsDetails`](#getgamificationinsightsdetails) - Get insights details for the current user
 - [`getGamificationInsightsGroupsTrends`](#getgamificationinsightsgroupstrends) - Get insights overall trend for the current user
 - [`getGamificationInsightsGroupsTrendsAll`](#getgamificationinsightsgroupstrendsall) - Get insights overall trend
+- [`getGamificationInsightsManagers`](#getgamificationinsightsmanagers) - Query managers in a profile during a period of time
 - [`getGamificationInsightsMembers`](#getgamificationinsightsmembers) - Query users in a profile during a period of time
 - [`getGamificationInsightsRankings`](#getgamificationinsightsrankings) - Get insights rankings
 - [`getGamificationInsightsTrends`](#getgamificationinsightstrends) - Get insights user trend for the current user
@@ -516,6 +517,7 @@ Get insights summary
 - `query.sortMetricId` - **(string, optional)** Sort Metric Id
 - `query.sortOrder` - **(string, optional)** Sort order
 - `query.userIds` - **(string, optional)** A list of up to 100 comma-separated user Ids
+- `query.reportsTo` - **(string, optional)** The reportsTo used by ABAC policies.
 
 #### Returns
 
@@ -652,6 +654,44 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getGamificationInsightsManagers`
+
+Query managers in a profile during a period of time
+
+#### Endpoint
+
+`GET /api/v2/gamification/insights/managers`
+
+#### Parameters
+
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.filterType` - **(string, required)** Filter type for the query request.
+- `query.filterId` - **(string, required)** ID for the filter type.
+- `query.granularity` - **(string, required)** Granularity
+- `query.startWorkday` - **(string, required)** The start work day. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
+- `query.pageSize` - **(number, optional)** Page size
+- `query.pageNumber` - **(number, optional)** Page number
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [InsightsAgents](../definitions/insightsagents-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getGamificationInsightsMembers`
 
 Query users in a profile during a period of time
@@ -667,6 +707,7 @@ Query users in a profile during a period of time
 - `query.filterId` - **(string, required)** ID for the filter type.
 - `query.granularity` - **(string, required)** Granularity
 - `query.startWorkday` - **(string, required)** The start work day. Dates are represented as an ISO-8601 string. For example: yyyy-MM-dd
+- `query.reportsTo` - **(string, optional)** The reportsTo used by ABAC policies.
 
 #### Returns
 
@@ -708,6 +749,7 @@ Get insights rankings
 - `query.sortMetricId` - **(string, optional)** Sort Metric Id
 - `query.sectionSize` - **(number, optional)** The number of top and bottom users to return before ties
 - `query.userIds` - **(string, optional)** A list of up to 100 comma-separated user Ids
+- `query.reportsTo` - **(string, optional)** The reportsTo used by ABAC policies.
 
 #### Returns
 
@@ -2748,4 +2790,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.387Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.652Z*

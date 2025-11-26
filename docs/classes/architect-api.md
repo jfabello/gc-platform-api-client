@@ -40,6 +40,7 @@ Flows, Prompts, IVR schedules, Dependency Tracking
 - [`getArchitectGrammarLanguage`](#getarchitectgrammarlanguage) - Get a grammar language.
 - [`getArchitectGrammars`](#getarchitectgrammars) - Get a pageable list of grammars, filtered by query parameters
 - [`getArchitectIvr`](#getarchitectivr) - Get an IVR config.
+- [`getArchitectIvrIdentityresolution`](#getarchitectivridentityresolution) - Get an IVR IdentityResolutionConfig.
 - [`getArchitectIvrs`](#getarchitectivrs) - Get IVR configs.
 - [`getArchitectIvrsDivisionviews`](#getarchitectivrsdivisionviews) - Get a pageable list of basic ivr configuration information objects filterable by query parameters.
 - [`getArchitectPrompt`](#getarchitectprompt) - Get specified user prompt
@@ -107,13 +108,11 @@ Flows, Prompts, IVR schedules, Dependency Tracking
 - [`postArchitectIvrs`](#postarchitectivrs) - Create IVR config.
 - [`postArchitectPromptHistory`](#postarchitectprompthistory) - Generate prompt history
 - [`postArchitectPromptResources`](#postarchitectpromptresources) - Create a new user prompt resource
-- [`postArchitectPromptResourceUploads`](#postarchitectpromptresourceuploads) - Creates a presigned URL for uploading a user prompt file
 - [`postArchitectPrompts`](#postarchitectprompts) - Create a new user prompt
 - [`postArchitectSchedulegroups`](#postarchitectschedulegroups) - Creates a new schedule group
 - [`postArchitectSchedules`](#postarchitectschedules) - Create a new schedule.
 - [`postArchitectSystempromptHistory`](#postarchitectsystemprompthistory) - Generate system prompt history
 - [`postArchitectSystempromptResources`](#postarchitectsystempromptresources) - Create system prompt resource override.
-- [`postArchitectSystempromptResourceUploads`](#postarchitectsystempromptresourceuploads) - Creates a presigned URL for uploading a system prompt file
 - [`postFlowHistory`](#postflowhistory) - Generate flow history
 - [`postFlowInstancesSettingsLoglevels`](#postflowinstancessettingsloglevels) - Set the logLevel for a particular flow id
 - [`postFlows`](#postflows) - Create flow
@@ -137,6 +136,7 @@ Flows, Prompts, IVR schedules, Dependency Tracking
 - [`postFlowVersions`](#postflowversions) - Create flow version
 - [`putArchitectEmergencygroup`](#putarchitectemergencygroup) - Updates a emergency group by ID
 - [`putArchitectIvr`](#putarchitectivr) - Update an IVR Config.
+- [`putArchitectIvrIdentityresolution`](#putarchitectivridentityresolution) - Update an IVR IdentityResolutionConfig.
 - [`putArchitectPrompt`](#putarchitectprompt) - Update specified user prompt
 - [`putArchitectPromptResource`](#putarchitectpromptresource) - Update specified user prompt resource
 - [`putArchitectSchedule`](#putarchitectschedule) - Update schedule by ID
@@ -1251,7 +1251,7 @@ Get a pageable list of basic emergency group objects filterable by query paramet
 
 #### Description
 
-This returns emergency groups consisting of name and division. If one or more IDs are specified, the search will fetch flow outcomes that match the given ID(s) and not use any additional supplied query parameters in the search.
+This returns emergency groups consisting of name and division. If one or more IDs are specified, the search will fetch emergency groups that match the given ID(s) and not use any additional supplied query parameters in the search.
 
 #### Endpoint
 
@@ -1436,6 +1436,38 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `getArchitectIvrIdentityresolution`
+
+Get an IVR IdentityResolutionConfig.
+
+#### Endpoint
+
+`GET /api/v2/architect/ivrs/{ivrId}/identityresolution`
+
+#### Parameters
+
+- `ivrId` - **(string, required)** IVR id
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IVRIdentityResolutionConfig](../definitions/ivridentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `getArchitectIvrs`
 
 Get IVR configs.
@@ -1454,6 +1486,7 @@ Get IVR configs.
 - `query.name` - **(string, optional)** Name of the IVR to filter by.
 - `query.dnis` - **(string, optional)** The phone number of the IVR to filter by.
 - `query.scheduleGroup` - **(string, optional)** The Schedule Group of the IVR to filter by.
+- `query.expand` - **(string[], optional)** Which fields, if any, to expand
 
 #### Returns
 
@@ -2296,6 +2329,7 @@ If one or more IDs are specified, the search will fetch flows that match the giv
 - `query.secure` - **(string, optional)** Secure
 - `query.deleted` - **(boolean, optional)** Include deleted
 - `query.includeSchemas` - **(boolean, optional)** Include variable schemas
+- `query.virtualAgentEnabled` - **(boolean, optional)** Include/exclude virtual agent flows
 - `query.publishedAfter` - **(string, optional)** Published after
 - `query.publishedBefore` - **(string, optional)** Published before
 - `query.divisionId` - **(string[], optional)** division ID(s)
@@ -3962,39 +3996,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
-### `postArchitectPromptResourceUploads`
-
-Creates a presigned URL for uploading a user prompt file
-
-#### Endpoint
-
-`POST /api/v2/architect/prompts/{promptId}/resources/{languageCode}/uploads`
-
-#### Parameters
-
-- `promptId` - **(string, required)** Prompt ID
-- `languageCode` - **(string, required)** Language
-
-#### Returns
-
-A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
-
-| HTTP Status Code | Returned type | Description |
-|---|---|---|
-| `200` | [PromptAssetUpload](../definitions/promptassetupload-definition.md) | successful operation |
-| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
-| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
-| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
-| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
-| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
-| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
-| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
-| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
-| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
-| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
-| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
-
 ### `postArchitectPrompts`
 
 Create a new user prompt
@@ -4147,39 +4148,6 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [SystemPromptAsset](../definitions/systempromptasset-definition.md) | successful operation |
-| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
-| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
-| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
-| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
-| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
-| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
-| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
-| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
-| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
-| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
-| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
-| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
-
-### `postArchitectSystempromptResourceUploads`
-
-Creates a presigned URL for uploading a system prompt file
-
-#### Endpoint
-
-`POST /api/v2/architect/systemprompts/{promptId}/resources/{languageCode}/uploads`
-
-#### Parameters
-
-- `promptId` - **(string, required)** Prompt ID
-- `languageCode` - **(string, required)** Language
-
-#### Returns
-
-A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
-
-| HTTP Status Code | Returned type | Description |
-|---|---|---|
-| `200` | [PromptAssetUpload](../definitions/promptassetupload-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -5028,6 +4996,40 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `putArchitectIvrIdentityresolution`
+
+Update an IVR IdentityResolutionConfig.
+
+#### Endpoint
+
+`PUT /api/v2/architect/ivrs/{ivrId}/identityresolution`
+
+#### Parameters
+
+- `ivrId` - **(string, required)** IVR id
+- `body` - **([IVRIdentityResolutionConfig](../definitions/ivridentityresolutionconfig-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IVRIdentityResolutionConfig](../definitions/ivridentityresolutionconfig-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `422` | [ErrorBody](../definitions/errorbody-definition.md) |  |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `putArchitectPrompt`
 
 Update specified user prompt
@@ -5464,4 +5466,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.391Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.655Z*

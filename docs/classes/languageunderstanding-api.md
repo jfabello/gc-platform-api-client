@@ -16,6 +16,8 @@ Language Understanding
 - [`getLanguageunderstandingDomainVersion`](#getlanguageunderstandingdomainversion) - Find an NLU Domain Version.
 - [`getLanguageunderstandingDomainVersionReport`](#getlanguageunderstandingdomainversionreport) - Retrieved quality report for the specified NLU Domain Version
 - [`getLanguageunderstandingDomainVersions`](#getlanguageunderstandingdomainversions) - Get all NLU Domain Versions for a given Domain.
+- [`getLanguageunderstandingIgnorephrase`](#getlanguageunderstandingignorephrase) - Get list of all ignored phrases of the specified language code
+- [`getLanguageunderstandingIgnoretopic`](#getlanguageunderstandingignoretopic) - Get list of all ignored topics of the specified language code
 - [`getLanguageunderstandingMiner`](#getlanguageunderstandingminer) - Get information about a miner.
 - [`getLanguageunderstandingMinerDraft`](#getlanguageunderstandingminerdraft) - Get information about a draft.
 - [`getLanguageunderstandingMinerDrafts`](#getlanguageunderstandingminerdrafts) - Retrieve the list of drafts created.
@@ -34,6 +36,10 @@ Language Understanding
 - [`postLanguageunderstandingDomainVersionPublish`](#postlanguageunderstandingdomainversionpublish) - Publish the draft NLU Domain Version.
 - [`postLanguageunderstandingDomainVersions`](#postlanguageunderstandingdomainversions) - Create an NLU Domain Version.
 - [`postLanguageunderstandingDomainVersionTrain`](#postlanguageunderstandingdomainversiontrain) - Train the draft NLU Domain Version.
+- [`postLanguageunderstandingIgnorephrase`](#postlanguageunderstandingignorephrase) - Add phrases to the ignored phrases list
+- [`postLanguageunderstandingIgnorephraseRemove`](#postlanguageunderstandingignorephraseremove) - Delete ignored phrases
+- [`postLanguageunderstandingIgnoretopic`](#postlanguageunderstandingignoretopic) - Add topics to the ignored topics list
+- [`postLanguageunderstandingIgnoretopicRemove`](#postlanguageunderstandingignoretopicremove) - Delete ignored topics
 - [`postLanguageunderstandingMinerDrafts`](#postlanguageunderstandingminerdrafts) - Create a new draft resource.
 - [`postLanguageunderstandingMinerExecute`](#postlanguageunderstandingminerexecute) - Start the mining process. Specify date range pair with mediaType, queueIds, participantType for mining data from Genesys Cloud. Specify only uploadKey for mining through an external file.
 - [`postLanguageunderstandingMiners`](#postlanguageunderstandingminers) - Create a unique miner.
@@ -439,6 +445,82 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | HTTP Status Code | Returned type | Description |
 |---|---|---|
 | `200` | [NluDomainVersionListing](../definitions/nludomainversionlisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getLanguageunderstandingIgnorephrase`
+
+Get list of all ignored phrases of the specified language code
+
+#### Endpoint
+
+`GET /api/v2/languageunderstanding/ignorephrases/{languageCode}`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.pageSize` - **(number, optional)** The page size for the listing. The max that will be returned is 200.
+- `query.pageNumber` - **(number, optional)** The page number for the listing
+- `query.text` - **(string, optional)** The phrase text filter applied to the listing
+- `query.sortOrder` - **(string, optional)** The sort order for the listing
+- `query.sortBy` - **(string, optional)** The field to sort by for the listing
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IgnoredMinedPhraseListing](../definitions/ignoredminedphraselisting-definition.md) | successful operation |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `getLanguageunderstandingIgnoretopic`
+
+Get list of all ignored topics of the specified language code
+
+#### Endpoint
+
+`GET /api/v2/languageunderstanding/ignoretopics/{languageCode}`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `query` - **(object)** The query string parameters for the request. An empty object or `null` is allowed if all query string parameters are optional.
+- `query.pageSize` - **(number, optional)** The page size for the listing. The max that will be returned is 200.
+- `query.pageNumber` - **(number, optional)** The page number for the listing
+- `query.text` - **(string, optional)** The topic text filter applied to the listing
+- `query.sortOrder` - **(string, optional)** The sort order for the listing
+- `query.sortBy` - **(string, optional)** The field to sort by for the listing
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IgnoredMinedTopicListing](../definitions/ignoredminedtopiclisting-definition.md) | successful operation |
 | `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
 | `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
 | `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
@@ -1059,6 +1141,140 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 | `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
 | `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
 
+### `postLanguageunderstandingIgnorephrase`
+
+Add phrases to the ignored phrases list
+
+#### Endpoint
+
+`POST /api/v2/languageunderstanding/ignorephrases/{languageCode}`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `body` - **([IgnorePhrasesRequest](../definitions/ignorephrasesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IgnorePhrasesResponse](../definitions/ignorephrasesresponse-definition.md) | successful operation |
+| `201` | [IgnorePhrasesResponse](../definitions/ignorephrasesresponse-definition.md) | Phrases added successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postLanguageunderstandingIgnorephraseRemove`
+
+Delete ignored phrases
+
+#### Endpoint
+
+`POST /api/v2/languageunderstanding/ignorephrases/{languageCode}/remove`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `body` - **([RemoveEntitiesRequest](../definitions/removeentitiesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Ignored phrases deleted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postLanguageunderstandingIgnoretopic`
+
+Add topics to the ignored topics list
+
+#### Endpoint
+
+`POST /api/v2/languageunderstanding/ignoretopics/{languageCode}`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `body` - **([IgnoreTopicsRequest](../definitions/ignoretopicsrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `200` | [IgnoreTopicsResponse](../definitions/ignoretopicsresponse-definition.md) | successful operation |
+| `201` | [IgnoreTopicsResponse](../definitions/ignoretopicsresponse-definition.md) | Topics added successfully |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
+### `postLanguageunderstandingIgnoretopicRemove`
+
+Delete ignored topics
+
+#### Endpoint
+
+`POST /api/v2/languageunderstanding/ignoretopics/{languageCode}/remove`
+
+#### Parameters
+
+- `languageCode` - **(string, required)** Language Code
+- `body` - **([RemoveEntitiesRequest](../definitions/removeentitiesrequest-definition.md), required)** - The body of the request. An empty object or `null` is allowed if the body is optional.
+
+#### Returns
+
+A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-client) object with the response of the call to the API endpoint. The promise fulfills if the HTTP status code is between 200 and 299. The promise rejects for any other HTTP status code.
+
+| HTTP Status Code | Returned type | Description |
+|---|---|---|
+| `204` |  | Ignored topics deleted |
+| `400` | [ErrorBody](../definitions/errorbody-definition.md) | The request could not be understood by the server due to malformed syntax. |
+| `401` | [ErrorBody](../definitions/errorbody-definition.md) | No authentication bearer token specified in authorization header. |
+| `403` | [ErrorBody](../definitions/errorbody-definition.md) | You are not authorized to perform the requested action. |
+| `404` | [ErrorBody](../definitions/errorbody-definition.md) | The requested resource was not found. |
+| `408` | [ErrorBody](../definitions/errorbody-definition.md) | The client did not produce a request within the server timeout limit. This can be caused by a slow network connection and/or large payloads. |
+| `409` | [ErrorBody](../definitions/errorbody-definition.md) | The request conflicts with the current state of the target resource. |
+| `413` | [ErrorBody](../definitions/errorbody-definition.md) | The request is over the size limit. Maximum bytes: %s |
+| `415` | [ErrorBody](../definitions/errorbody-definition.md) | Unsupported Media Type - Unsupported or incorrect media type, such as an incorrect Content-Type value in the header. |
+| `429` | [ErrorBody](../definitions/errorbody-definition.md) | Rate limit exceeded the maximum. Retry the request in [%s] seconds |
+| `500` | [ErrorBody](../definitions/errorbody-definition.md) | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| `503` | [ErrorBody](../definitions/errorbody-definition.md) | Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance). |
+| `504` | [ErrorBody](../definitions/errorbody-definition.md) | The request timed out. |
+
 ### `postLanguageunderstandingMinerDrafts`
 
 Create a new draft resource.
@@ -1197,4 +1413,4 @@ A promise that settles to an [`HTTPResponse`](https://github.com/jfabello/http-c
 
 ---
 
-*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-04-24T15:04:25.409Z*
+*This file was automatically generated by the Generate Genesys Cloud Platform API classes utility on 2025-11-26T23:43:17.666Z*
