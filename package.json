@@ -1,6 +1,6 @@
 {
 	"name": "@jfabello/gc-platform-api-client",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "High-performance Genesys Cloud Platform API client for Node.js.",
 	"keywords": [
 		"genesys",
