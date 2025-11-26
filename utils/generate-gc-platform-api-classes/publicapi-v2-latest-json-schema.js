@@ -111,7 +111,12 @@ const gcPlatformAPISpecSchema = {
 												additionalProperties: false
 											},
 											"collectionFormat": { type: "string", enum: ["multi"] },
-											"x-example": { type: "string" }
+											"x-example": { type: "string" },
+											"minimum": { type: "integer" },
+											"maximum": { type: "integer" },
+											"minItems": { type: "integer", minimum: 0 },
+											"maxItems": { type: "integer", minimum: 0 },
+											"pattern": { type: "string", minLength: 1 }
 										},
 										if: {
 											properties: {
@@ -268,7 +273,7 @@ const gcPlatformAPISpecSchema = {
 								type: "object",
 								properties: {
 									"type": { type: "string", enum: ["boolean", "integer", "number", "string", "object", "array"] },
-									"format": { type: "string", enum: ["int32", "int64", "float", "double", "date-time", "local-date-time", "date", "local-time", "uri", "url"] },
+									"format": { type: "string", enum: ["int32", "int64", "float", "double", "interval", "date-time", "local-date-time", "date", "local-time", "uri", "url"] },
 									"enum": { type: "array", minItems: 1, items: { oneOf: [{ type: "string" }, { type: "integer" }] } },
 									"pattern": { type: "string", minLength: 1 },
 									"description": { type: "string", minLength: 1 },
@@ -287,7 +292,7 @@ const gcPlatformAPISpecSchema = {
 										type: "object",
 										properties: {
 											type: { type: "string", enum: ["integer", "number", "string", "object", "array"] },
-											format: { type: "string", enum: ["int32", "int64", "float", "double", "date-time", "date", "uri"] },
+											format: { type: "string", enum: ["int32", "int64", "float", "double", "interval", "date-time", "date", "uri"] },
 											enum: { type: "array", minItems: 1, items: { type: "string" } },
 											description: { type: "string", minLength: 1 },
 											items: {
