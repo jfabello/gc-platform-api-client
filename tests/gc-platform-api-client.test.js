@@ -359,14 +359,14 @@ describe("Genesys Cloud Platform API client for Node.js tests", () => {
 		}
 	});
 
-	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must throw an ERROR_GC_PLATFORM_API_CLIENT_ID_NOT_FOUND error and set the instance state to FAILED when the Genesys Cloud client ID is not an ID for the region", async () => {
+	test("A call to the connect(...) method of a Genesys Cloud Platform API client instance must throw an ERROR_GC_PLATFORM_API_CLIENT_AUTHENTICATION_FAILURE error and set the instance state to FAILED when the Genesys Cloud client ID is not an ID for the region", async () => {
 		expect.assertions(2);
 		const gcPlatformAPIClient = new GCPlatformAPIClient(DUMMY_CLIENT_ID, DUMMY_CLIENT_SECRET, DUMMY_REGION);
 		const gcPlatformAPIClientConnectPromise = gcPlatformAPIClient.connect();
 		try {
 			await gcPlatformAPIClientConnectPromise;
 		} catch (error) {
-			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_ID_NOT_FOUND);
+			expect(error).toBeInstanceOf(GCPlatformAPIClient.errors.ERROR_GC_PLATFORM_API_CLIENT_AUTHENTICATION_FAILURE);
 			expect(gcPlatformAPIClient.state).toBe(GCPlatformAPIClient.FAILED);
 		}
 	});
